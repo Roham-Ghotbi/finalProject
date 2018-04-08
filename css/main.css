@@ -1,0 +1,42 @@
+p {
+  font-size: 0.5em;
+}
+
+/* Grid */
+
+.project {
+  flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .row-projects {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+  .project {
+    flex: 1;
+  }
+  ._25 {
+    flex: 2.5;
+  }
+  ._5 {
+    flex: 5;
+  }
+}
+/* Style */
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.3em;
+  color: 'black';
+  background: 'white';
+  margin-bottom: 70px;
+}
+
+.project {
+  padding: 15px;
+  border: 1px solid #666;
+  margin: 5px 0;
+  /*background: #7fa7e8;*/
+}

@@ -1,0 +1,50 @@
+Part 1: Project Proposal
+
+- Who are you? Tell us about your team & skills. If there are key focus areas each of you is spearheading, help us know!
+
+I actually don’t have a team.
+
+I’m an 4th year EECS student and I have considerable python programming experience. I’m most interested in building an efficient backend and developing intuitive UX.
+
+- What are you building?
+
+Side Project Roadmap is a goal setting and timeline visualization webapp for side projects. Without the formal structure of a course, clients or company it can be difficult to maintain momentum on a personal side project. It is a visual timeline for people who are passionate about making or learning through making. Its main aims are to aid in visualization and increase social accountability.
+
+- Who are you building it for?  Why did you choose this area?
+
+The target user group is people who are serious about their side projects and want a way to organize and keep themselves accountable for the deadlines they set themselves. Primarily people ages 20-30 who are already fairly adept with technology and familiar with using other webapps. I chose this area because I’m someone who often loses momentum when working on a side project, so I see the need for this app. In addition such a tool does not yet exist. The closest solution that currently exists is Roadmap, which is a visual project and team management app. The purpose of this app is to target people who are passionate about their side projects, so it differs from a team management perspective, which will significantly influence the design and features of the app.
+
+- What are the indicators of success for your project? example: a cleaner, more intuitive interface than the existing solution, etc.
+
+It should be something that people can use easily. Its goal is to offload the mental labor of keep track of progress and goals on a side project in a visually pleasing and intuitive manner such that it is a pleasure to use. I visualize it as something visually light, simple to use and understand, highly functional, with intuitive and efficient user interactions. 
+
+Part 2: Web Framework
+
+-Which web framework did you choose for your project and why
+
+I’m going with Flask because of the course support for it.
+
+-How does it fit in with your project goals and architecture
+
+My main concern for the framework is simplicity and efficiency, and I believe that Flask supports this.
+
+-What has your experience been so far with the framework
+
+I’ve had minimal exposure before this class, but I feel fairly confident about the experiences gained during this class.
+
+Part 3: Information Architecture
+
+-What are some key user personas of your application and what are the information needs of these users interacting with your system
+
+A user needs to be able to create projects that have actions associated with them, organized into chains of actions. A user should be able to set dates they want to arrive at the actions by and visualize these chains of actions (including those of their other projects) in differing granularities.
+
+-What entities or objects are you storing in the application. How do these map to your user's information needs
+
+User: Entity that owns and updates projects. A user should be able to share and see friend’s projects and progress and visualize along with their own projects.
+Project: Comprised of one or multiple chains of actions. There is an overall goal date for the project.
+Chains of Actions: Groups of actions that get the user closer to their goal.
+Actions: The smallest unit of our system. Has a date and description attached to it.
+
+-How do these entities interact with each other - Which model did you choose(Relational, non-relational and Hybrid)
+
+I think I covered the way these entities interact with each other in the question above I chose a relational db because the data that will be collected is rigidly defined. In addition, SQL data integrity is crucial for this system.
