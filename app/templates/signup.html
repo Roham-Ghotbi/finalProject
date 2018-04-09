@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <h2>Sign Up to Our Database</h2>
+    <form action="" method="post" name="login">
+      {{ signupForm.hidden_tag() }}
+      <div class="divider"></div>
+      <div class="section">
+        <!-- Signup Form Fields -->
+        <p>
+          Choose Username:<br>
+          {{ signupForm.username(size=120) }}<br>
+        </p>
+        <p>
+          Create Password<br>
+          {{ signupForm.password(size=120) }}<br>
+        </p>
+      </div>
+      <div class="divider"></div>
+      <p><input type="submit" value="Sign Up"></p>
+    </form>
+  </div>
+  <div class= "row">
+      <a href="{{ url_for('index') }}">Back to Login</a>
+    </div>
+</div>
+{% endblock %}

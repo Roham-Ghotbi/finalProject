@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block header%}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class= "section">
+      <a href="{{ url_for('display_trips') }}">Back to Trips</a>
+    </div>
+    <form action="logout" id="logout">
+      <span id="username">Logged in as {{ name }}</span>
+      <input class="action-button" id="logout-button" type="submit" value="Logout">
+    </form>
+    <div class="row">
+    <h1>Create a Trip</h1>
+    <div class="divider"></div>
+    <div class="section">
+    <form action="" method="post" name="login">
+      {{ tripForm.hidden_tag() }}
+        <p>
+          Trip Name: <br>
+          {{tripForm.trip_name(size=120)}} <br>
+        </p>
+        <p>
+          Destination: <br>
+          {{tripForm.destination(size=120)}} <br>          
+        </p>
+        <p>
+          Friend Username: <br>
+          {{tripForm.friend_username(size=120)}} <br>          
+        </p>
+      </div>
+      <div class="divider"></div>
+      <p><input type="submit" value="Create Trip"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}

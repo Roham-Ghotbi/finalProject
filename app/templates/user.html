@@ -1,0 +1,13 @@
+<!-- this is page exists only for debugging purposes!! -->
+{% extends "base.html" %}
+  {% block header%}
+  <form action="logout" id="logout">
+    <span id="username">Logged in as {{ name }}</span>
+    <input class="action-button" id="logout-button" type="submit" value="Logout">
+  </form>
+  {% endblock %}
+
+{% block content %}
+    <span id="username">uid: {{ uid }}</span>
+
+{% endblock %}
