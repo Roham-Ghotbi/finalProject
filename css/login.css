@@ -1,0 +1,40 @@
+body {
+    background-image: url("background3.PNG");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+img {
+	opacity: 0.5;
+}
+
+.content-id--content {
+	vertical-align: baseline;
+	text-align: center;
+}
+
+header {
+	padding-top: 15%;
+	text-align: center;
+}
+
+.or {
+	margin: 20px auto;
+	text-align: center;	
+}
+
+.text-inputs {
+	margin: 20px auto;
+	text-align: center;	
+}
+
+.override-aui_text {
+	display: block;
+	width: 250px;
+	height: 40px;
+	margin:auto;    
+}
+
+#js-email-field {
+	padding-bottom: 5px;
+}
