@@ -5,7 +5,7 @@
 {% block content %}
   <div class="container">
     <form action="logout" id="logout">
-      <span id="username">Logged in as {{ name }}</span>
+      <span id="username">Logged in as {{ first_name }}</span>
       <input class="action-button" id="logout-button" type="submit" value="Logout">
     </form>
     <div class="row">
@@ -19,10 +19,11 @@
               <th data-field="destination">Destination</th>
             </tr>
           </thead>
-          {% for trip in trips %}
+          {% for action in actions %}
             <tr>
-              <td>{{ trip['trip_name'] }}</td>
-              <td>{{ trip['destination'] }}</td>
+              <td>{{ action['action_name'] }}</td>
+              <td>{{ action['description'] }}</td>
+              <td>{{ action['due_date'] }}</td>
               <!-- Below is a method of adding the 'add an order' button which will route you to create_order in views.py -->
               <td><a id ="remove" href="{{ url_for('remove_trip', value=trip['trip_id']) }}">Remove Trip</a></td>            
             </tr>
