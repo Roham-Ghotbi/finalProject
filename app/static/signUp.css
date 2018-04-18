@@ -1,0 +1,11 @@
+body {
+    background-image: url("background3.png");
+    /*background-repeat: no-repeat;*/
+    background-size: cover;
+}
+
+.section {
+	padding-top: 15%;
+	vertical-align: baseline;
+	text-align: center;
+}

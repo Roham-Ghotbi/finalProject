@@ -1,14 +1,17 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, DateField
+from wtforms import StringField
+from flask_wtf.html5 import EmailField
 from wtforms.validators import DataRequired
 
-# class LoginForm(Form):
-#     username = StringField('username', validators=[DataRequired()])
-#     password = StringField('password', validators=[DataRequired()])
+class LoginForm(Form):
+	username = EmailField('username', validators=[DataRequired()])
+	password = StringField('password', validators=[DataRequired()])
 
 class SignupForm(Form):
-    username = StringField('username', validators=[DataRequired()])
-    password = StringField('password', validators=[DataRequired()])
+	first_name = StringField('first_name', validators=[DataRequired()])
+	last_name = StringField('last_name', validators=[DataRequired()])
+	username = EmailField('username', validators=[DataRequired()])
+	password = StringField('password', validators=[DataRequired()])
     
 class ActionForm(Form):
     action_name = StringField('action_name', validators=[DataRequired()])

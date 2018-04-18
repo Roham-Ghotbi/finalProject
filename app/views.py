@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request, session, url_for
 from app import app, models, db
-from .forms import SignupForm, ActionForm, ProjectForm
+from .forms import SignupForm, LoginForm
 # Access the models file to use SQL functions
 from .models import *
 
@@ -36,6 +36,8 @@ def signup():
     signupForm = SignupForm()
     if signupForm.validate_on_submit():
 
+        first_name = signupForm.first_name.data
+        last_name = signupForm.last_name.data
         username = signupForm.username.data
         password = signupForm.password.data
         insert_user(username, password)
@@ -50,6 +52,7 @@ def display_user_timeline():
     user_id = retrieve_user_id(username)
     projects = retrieve_all_projects(user_id)
     return render_template('timeline.html', first_name=first_name, projects=projects)
+
 
 @app.route('/project_focus/<value>')
 def display_project_focus():
@@ -96,4 +99,7 @@ def remove_project(value):
     delete_project(value)
     # TODO: just want to remove element from DOM w/o redirecting
     return redirect('timeline')
+
+
+
 

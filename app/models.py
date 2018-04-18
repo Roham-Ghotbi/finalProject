@@ -1,31 +1,31 @@
 import sqlite3 as sql
 
-##### USER #####
+# user functions
 
 def insert_user(username, first_name, last_name, password):
     # returns user_id
     with sql.connect("database.db") as con:
-    	cur = con.cursor()
-    	cur.execute("INSERT INTO users (username, first_name, last_name, password) VALUES (?,?)", (username, first_name, last_name, password))
-    	con.commit()
-    	return cur.lastrowid
+        cur = con.cursor()
+        cur.execute("INSERT INTO users (username, first_name, last_name, password) VALUES (?,?)", (username, first_name, last_name, password))
+        con.commit()
+        return cur.lastrowid
 
 def retrieve_user_id(username):
     with sql.connect("database.db") as con:
-        cur = con.cursor()
-        return str(cur.execute('select user_id from users where username = "' + username + '"').fetchone()[0]) # why is it in tuple form??
+    	cur = con.cursor()
+    	return str(cur.execute('select user_id from users where username = "' + username + '"').fetchone()[0]) # why is it in tuple form??
 
 def retrieve_all_emails():
     with sql.connect("database.db") as con:
-    	cur = con.cursor()
-    	return cur.execute('select username from users').fetchall()
+        cur = con.cursor()
+        return cur.execute('select username from users').fetchall()
 
 def retrieve_password(username):
     with sql.connect("database.db") as con:
         cur = con.cursor()
         return str(cur.execute('SELECT password from users where username = "' + username +'"').fetchone()[0])
+# trip functions
 
-##### PROJECT #####
 def insert_project(project_name, description, due_date, user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
@@ -43,10 +43,10 @@ def retrieve_project(project_id):
 
 def retrieve_all_projects(user_id):
     with sql.connect("database.db") as con:
-    	con.row_factory = sql.Row
-    	cur = con.cursor()
+        con.row_factory = sql.Row
+        cur = con.cursor()
         result = cur.execute('select * from projects where user_id = "' + user_id + '"').fetchall() 
-    	return result
+        return result
 
 def delete_project(project_id):
     with sql.connect("database.db") as con:
