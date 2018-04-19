@@ -40,8 +40,11 @@ def signup():
         last_name = signupForm.last_name.data
         username = signupForm.username.data
         password = signupForm.password.data
-        insert_user(username, first_name, last_name, password)
-        return redirect('/index')
+        res = insert_user(username, first_name, last_name, password)
+        if res == -1:
+            return redirect('/timeline', userExist=True)
+        else:
+            return redirect('/index')
 
     return render_template('signup.html', signupForm=signupForm)
 
