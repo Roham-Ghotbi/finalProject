@@ -1,0 +1,9 @@
+clean up html and do some VERY basic styling
+figure out if doing everything in one page with shifting focus is possible
+figure out how to do everything via popup menus
+enable order by date of actions
+enable dragging of actions
+error checking of user actions everywhere via popup menus
+check clickable regions and add buttons
+do security and google sign up
+styling
