@@ -6,7 +6,7 @@ def insert_user(username, first_name, last_name, password):
     # returns user_id
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO users (username, first_name, last_name, password) VALUES (?,?)", (username, first_name, last_name, password))
+        cur.execute("INSERT INTO users (username, first_name, last_name, password) VALUES (?,?,?,?)", (username, first_name, last_name, password))
         con.commit()
         return cur.lastrowid
 

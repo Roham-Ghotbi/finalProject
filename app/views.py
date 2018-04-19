@@ -14,7 +14,7 @@ def index():
     else:
         return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
         username = request.form['username']
@@ -40,7 +40,7 @@ def signup():
         last_name = signupForm.last_name.data
         username = signupForm.username.data
         password = signupForm.password.data
-        insert_user(username, password)
+        insert_user(username, first_name, last_name, password)
         return redirect('/index')
 
     return render_template('signup.html', signupForm=signupForm)
