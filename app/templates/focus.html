@@ -4,20 +4,25 @@
 
 {% block content %}
   <div class="container">
+    <div class= "section">
+      <a href="{{ url_for('display_user_timeline') }}">Back to Timeline</a>
+    </div>
     <form action="logout" id="logout">
       <span id="username">Logged in as {{ first_name }}</span>
       <input class="action-button" id="logout-button" type="submit" value="Logout">
     </form>
     <div class="row">
+      <a id ="remove" href="{{ url_for('remove_project', value=project['project_id']) }}"> Remove Project</a>
       <h1>{{ project['project_name'] }}</h1>
       <div class="divider"></div>
       <div class="section">        
         <table class="striped">
           <thead>
             <tr>
-              <th data-field="trip_name">Project Focus</th>
+              <th data-field="trip_name">Action Name</th>
               <th data-field="description">Description</th>
               <th data-field="due_date">Due Date</th>
+              <td><a href="{{ url_for('create_action') }}"> + Action</a></td> 
             </tr>
           </thead>
           {% for action in actions %}
@@ -25,13 +30,10 @@
               <td>{{ action['action_name'] }}</td>
               <td>{{ action['description'] }}</td>
               <td>{{ action['due_date'] }}</td>
-              <td><a id ="remove" href="{{ url_for('remove_action', value=action['action_id']) }}">Remove Action</a></td>            
+              <td><a id ="remove" href="{{ url_for('remove_action', value=action['action_id']) }}"> - Action</a></td>            
             </tr>
           {% endfor %}
         </table>
-      </div>
-      <div class= "section">
-        <a href="{{ url_for('create_action') }}">Add Action</a>
       </div>
     </div>
   </div>

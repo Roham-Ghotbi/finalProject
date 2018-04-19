@@ -43,15 +43,27 @@ def insert_project(project_name, description, due_date, user_id):
         cur = con.cursor()
         cur.execute("INSERT INTO projects (project_name, description, due_date, user_id) VALUES (?,?,?,?)", (project_name, description, due_date, user_id))
         con.commit()
-    # TO DO: Add update functionality
+    # TODO: Add update functionality
 
 def retrieve_project(project_id):
-    # returns project as a dictionary
+    # returns project as dictionary
     with sql.connect("database.db") as con:
         con.row_factory = sql.Row
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM projects WHERE project_id = ?", (project_id, )).fetchone()[0]
+        result = cur.execute("SELECT * FROM projects WHERE project_id = ?", (project_id, )).fetchone() 
         return result
+
+def retrieve_project_id(project_name):
+    # returns project_id
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        return str(cur.execute('select project_id from projects where project_name = "' + project_name + '"').fetchone()[0])
+
+def retrieve_project_id_from_action(action_id):
+    # returns project_id
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        return str(cur.execute("SELECT project_id from actions where action_id = ?", (action_id, )).fetchone()[0])
 
 def retrieve_all_projects(user_id):
     with sql.connect("database.db") as con:
@@ -73,28 +85,8 @@ def insert_action(action_name, description, due_date, project_id):
         cur = con.cursor()
         cur.execute("INSERT INTO actions (action_name, description, due_date, project_id) VALUES (?,?,?,?)", (action_name, description, due_date, project_id))
         con.commit()
-    # TO DO: Add update functionality
-
-def retrieve_project_id_from_action(action_id):
-    # returns project_id
-    with sql.connect("database.db") as con:
-        cur = con.cursor()
-        return str(cur.execute("SELECT project_id from actions where action_id = ?", (action_id, )).fetchone()[0])
-
-def retrieve_project(project_id):
-    # returns project as dictionary
-    with sql.connect("database.db") as con:
-        con.row_factory = sql.Row
-        cur = con.cursor()
-        result = cur.execute("SELECT * FROM projects WHERE project_id = ?", (project_id, )).fetchone() 
-        return result
-
-def retrieve_project_id(project_name):
-    # returns project_id
-    with sql.connect("database.db") as con:
-        cur = con.cursor()
-        return str(cur.execute('select project_id from projects where project_name = "' + project_name + '"').fetchone()[0])
-
+        return cur.lastrowid
+    # TODO: Add update functionality
 
 def retrieve_all_actions(project_id):
     with sql.connect("database.db") as con:
