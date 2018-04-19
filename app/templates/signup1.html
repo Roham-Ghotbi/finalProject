@@ -1,13 +1,26 @@
 {% extends "base.html" %}
+
+{% block header%}
+
+      <!-- <link rel="stylesheet" href="./static/login.css"> -->
+      <link rel="stylesheet" href="./static/signUp.css">
+      <!-- Google Login -->
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+      <title>Sign Up!</title>
+
+{% endblock %}
+
 {% block content %}
 <div class="container">
   <div class="row">
 
-    <h2>Sign Up to Our Database</h2>
+    
     <form action="" method="post" name="login">
       {{ signupForm.hidden_tag() }}
       <div class="divider"></div>
       <div class="section">
+        <h2>Create an Account</h2>
         <!-- Signup Form Fields -->
         <p>
           FirstName:<br>
@@ -22,7 +35,7 @@
           {{ signupForm.username(size=120) }}<br>
         </p>
         <p>
-          Create Password<br>
+          Create Password:<br>
           {{ signupForm.password(size=120) }}<br>
         </p>
       </div>

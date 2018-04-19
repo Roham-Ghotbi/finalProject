@@ -1,81 +1,26 @@
-  {% extends "base.html" %}
-  <head>
-    {% block header%}
+{% extends "base.html" %}
 
-      <link rel="stylesheet" href="./static/login.css">
-      <!-- Google Login -->
-      <script src="https://apis.google.com/js/platform.js" async defer></script>
+{% block title %}
+	Login
+{% endblock %}
 
-      <title>Sign In!</title>
+{% block head %}
+	{{ super() }}
+{% endblock %}
 
-    {% endblock %}
-    
-  </head>
-  <body>
-    {% block content %}
-      <header>
-        <h1 class="Login">Our Project Name</h1>
-        <a class="Login" id="logo" href="#">
-          <img src="">
-        </a>
-      </header>
-      
-      <section class="content-id--content" role="main">
-        <section data-module="id/login">
-          <section id="login-form" class="">
-            <section class="aui-page-panel-inner">
+{% block content %}
+<div class="container">
+<h2>SideProject Roadmap</h2>
+	<h4>Let's get you logge in</h4>
+	<form action="/login" method = "POST"> 
+		Username<input type="text" name="username">
+		Password<input type="text" name="password">
+		<input class="action-button"id="login" type="submit" value="Submit">
+	</form>
+	<div class= "section">
+		<h4>Don't have an account?</h4>
+      	<a href="{{ url_for('signup') }}">Register</a>
+    </div>
+</div>
 
-              <div class="google-login" data-i18n-or="or">
-                <form class="connect-button" name="login" data-module="registration/connect-account-button" method="POST" action="/socialauth/login/google-oauth2/">
-                  <!-- Google Login NEEDS TO BE FIXED-->
-                  <div class="g-signin2" data-onsuccess="onSignIn">
-                    <button type="submit" class="aui-button google-button login-with-google" resolved="">
-                      <span class="connect-button--label">Log in with Google</span>
-                    </button>
-                  </div>
-                </form>
-              </div>
-
-              <div class="or">
-                or
-              </div>
-    
-              <form action="" class="aui aid-form errors-below-inputs" data-errors="" id="aid-login-form" method="post">
-
-                <div id="js-global-login-error-container" class="aui-message aui-message-error hidden">
-                </div> 
-                
-                <section class="text-inputs">
-                  <input autofocus="" class="override-aui_text" id="js-email-field" name="username" maxlength="255" placeholder="Email" type="text" value="">
-                  <input class="override-aui_text" id="js-password-field" name="password" placeholder="Password" type="password">
-                </section>
-
-                <div class="button-container submit-container">
-                  <input type="submit" class="large-blue-button selenium-login-submit aui-button-primary" value="Log in">
-                  <a class="reset-password" href="/account/password/reset/">
-                    Forgot your password?
-                  </a>
-                </div>
-
-                
-                  <div class="button-container">
-                    
-                      <div class="signup-link">
-                        
-                          Need an account?
-                          <a href="{{ url_for('signup') }}">Sign up</a>
-                
-                      </div>
-                    
-                  </div>
-                
-              </form>
-            </section>
-          </section>
-        </section>
-      </section>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    {% endblock %}
-  </body>
+{% endblock %}

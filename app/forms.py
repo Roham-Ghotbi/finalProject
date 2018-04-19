@@ -1,7 +1,10 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, DateField
+from wtforms import StringField
+from wtforms.fields.html5 import DateField
 from flask_wtf.html5 import EmailField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Optional, Email
+
+# TODO: Enable optional input
 
 class LoginForm(Form):
 	username = EmailField('username', validators=[DataRequired()])
@@ -15,10 +18,11 @@ class SignupForm(Form):
     
 class ActionForm(Form):
     action_name = StringField('action_name', validators=[DataRequired()])
-    description = StringField('description')
-    due_date = DateField('due_date')
+    description = StringField('description', validators=[DataRequired()])
+    due_date = DateField('due_date', validators=[DataRequired()])
+    project_name = StringField('project_name', validators=[DataRequired()]) # need to remove this
 
 class ProjectForm(Form):
     project_name = StringField('action_name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
-    due_date = DateField('due_date')
+    due_date = DateField('due_date', validators=[Optional()])

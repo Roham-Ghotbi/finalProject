@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block header%}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class= "section">
+      <a href="{{ url_for('display_user_timeline') }}">Back to Timeline</a>
+    </div>
+    <form action="logout" id="logout">
+      <span id="first_name">Logged in as {{ first_name }}</span><!-- 
+      <input class="action-button" id="logout-button" type="submit" value="Logout">
+ -->    </form>
+    <div class="row">
+    <h1>Create a Project</h1>
+    <div class="divider"></div>
+    <div class="section">
+    <form action="" method="post" name="login">
+      {{ projectForm.hidden_tag() }}
+        <p>
+          Project Name: <br>
+          {{projectForm.project_name(size=120)}} <br>
+        </p>
+        <p>
+          Description: <br>
+          {{projectForm.description(size=120)}} <br>          
+        </p>
+        <p>
+          Due Date: <br>
+          {{projectForm.due_date(size=120)}} <br>          
+        </p>
+      </div>
+      <div class="divider"></div>
+      <p><input type="submit" value="Create Project"></p>
+    </form>
+  </div>
+</div>
+{% endblock %}

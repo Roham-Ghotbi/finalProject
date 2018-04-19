@@ -16,6 +16,56 @@
     <title>Timeline Overview</title>
   </head>
   <body>  
+    {% block content %}
+  <div class="container">
+    <form action="logout" id="logout">
+      <span id="username">Logged in as {{ first_name }}</span>
+      <input class="action-button" id="logout-button" type="submit" value="Logout">
+    </form>
+    <div class="row">
+      <h1>Your Timeline</h1>
+      <div class= "section">
+        <a href="{{ url_for('create_project') }}">Add a Project</a>
+      </div>
+      <div class="divider"></div>
+      <div class="section">        
+        <table class="striped">
+          {% for project in p %}
+          <thead>
+            <tr>
+              <th data-field="trip_name">Project Focus</th>
+              <th data-field="description">Description</th>
+              <th data-field="due_date">Due Date</th>
+              <td><a id ="remove" href="{{ url_for('remove_project', value=project['project_id']) }}"> - Project</a></td> 
+            </tr>
+            </tr>
+          </thead>
+            <tr>
+              <td>{{ project['project_name'] }}</td>
+              <td>{{ project['description'] }}</td>
+              <td>{{ project['due_date'] }}</td>
+                <thead>
+                  <tr>
+                    <th data-field="trip_name">Action Name</th>
+                    <th data-field="description">Description</th>
+                    <th data-field="due_date">Due Date</th>
+                    <td><a id ="remove" href="{{ url_for('create_action') }}"> + Action</a></td>            
+                  </tr>
+                </thead>
+                {% for action in project['actions']%}
+                <tr>
+                  <td>{{ action['action_name'] }}</td>
+                  <td>{{ action['description'] }}</td>
+                  <td>{{ action['due_date'] }}</td>
+                  <td><a id ="remove" href="{{ url_for('remove_action', value=action['action_id']) }}"> - Action</a></td>
+                </tr>
+                {% endfor %}
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+  </div>
     <div class="row-projects">
       <div class="project">
           <h3>Project 1</h3>
@@ -114,5 +164,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  {% endblock %}
   </body>
+
 </html>
