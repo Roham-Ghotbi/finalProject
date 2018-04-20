@@ -1,3 +1,47 @@
+/*Timeline*/
+
+.project ul li {
+  list-style-type: none;
+  position: relative;
+  width: 6px;
+  /*margin: 0 auto;*/
+  padding-top: 50px;
+  background: black;
+  /*font-size: 100em;*/
+
+}
+ 
+.project ul li::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: black;
+}
+
+.project ul li div {
+  position: relative;
+  bottom: 0;
+  left: 40px;
+  width: 200px;
+  padding: 15px;
+  background: #dae0e5;
+}
+ 
+/*.project ul li div::before {
+  content: '';
+  position: absolute;
+  bottom: 7px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}*/
+
+
 /* Text Styles */
 p {
   font-size: 0.5em;

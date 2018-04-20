@@ -43,15 +43,18 @@
     {% for project in p %}
       <div class="project">
         <h3><a href="{{ url_for('project_focus', value=project['project_name']) }}">{{ project['project_name'] }}</a></h3>
-        {% for action in project['actions']%}
-          <div class="action">
-            <div class="fab"></div>
-            <h5>{{ action['action_name'] }}</h5>
-            <h6>{{ action['due_date'] }}</h6>
-            <p>{{ action['description'] }}</p>
-            <a id ="remove" href="{{ url_for('remove_action', value=action['action_id']) }}"> - Action</a>
-          </div>
-        {% endfor %}
+        <ul>
+          {% for action in project['actions']%}
+          <li>
+            <div>
+              <h5>{{ action['action_name'] }}</h5>
+              <h6>{{ action['due_date'] }}</h6>
+              <p>{{ action['description'] }}</p>
+              <a id ="remove" href="{{ url_for('remove_action', value=action['action_id']) }}"> - Action</a>
+              </div>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
     {% endfor %}
 
