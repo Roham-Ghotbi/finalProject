@@ -7,7 +7,7 @@ enable order by date of actions
 enable dragging of actions
 error checking of user actions everywhere via popup menus
 check clickable regions and add buttons
-do security and google sign up
+do security(passswords fixed) and google sign up(for this wI thinkg we need to at least have our website url set)
 styling forever
 
 what happens when someone goes straight to /timeline without logging in? we need to handle gracefully and elegantly everywhere
