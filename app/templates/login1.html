@@ -26,7 +26,7 @@
             <section class="aui-page-panel-inner">
 
               <div class="google-login" data-i18n-or="or">
-                <form class="connect-button" name="login" data-module="registration/connect-account-button" method="POST" action="/socialauth/login/google-oauth2/">
+                <form class="connect-button" name="login" data-module="registration/connect-account-button" method="POST" action="/login">
                   <!-- Google Login NEEDS TO BE FIXED-->
                   <div class="g-signin2" data-onsuccess="onSignIn">
                     <button type="submit" class="aui-button google-button login-with-google" resolved="">
@@ -40,7 +40,7 @@
                 or
               </div>
     
-              <form action="" class="aui aid-form errors-below-inputs" data-errors="" id="aid-login-form" method="post">
+              <form action="/login" class="aui aid-form errors-below-inputs"  method = "POST">
 
                 <div id="js-global-login-error-container" class="aui-message aui-message-error hidden">
                 </div> 

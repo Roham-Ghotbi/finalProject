@@ -5,6 +5,8 @@ from app import app, models, db
 from .forms import SignupForm, ActionForm, ProjectForm
 # Access the models file to use SQL functions
 from .models import *
+#Securing password Storage
+import hashlib, uuid
 
 @app.route('/')
 @app.route('/index')
@@ -14,13 +16,15 @@ def index():
         ## TODO: this doesn't seem right
         return redirect('/timeline')
     else:
-        return render_template('login.html')
+        return render_template('login1.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
         username = request.form['username']
-        if request.form['password'] == retrieve_password(username):
+        password = hashPass(username, request.form['password'])
+        
+        if password == retrieve_password(username):
             user = retrieve_user(username)
             session['username'] = username
             session['first_name'] = user['first_name']
@@ -49,7 +53,7 @@ def signup():
         else:
             return redirect('/index')
 
-    return render_template('signup.html', signupForm=signupForm)
+    return render_template('signup1.html', signupForm=signupForm)
 
 @app.route('/timeline')
 def display_user_timeline():

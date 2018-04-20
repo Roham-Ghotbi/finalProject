@@ -1,12 +1,19 @@
 import sqlite3 as sql
+#Securing password Storage
+import hashlib, uuid
 
 ##### USER #####
+def hashPass(username, password):
+    #hashMethod for securely storing password
+    salt = hashlib.sha512(username).hexdigest()
+    return hashlib.sha512(password + salt).hexdigest()
 
 def insert_user(username, first_name, last_name, password):
     # returns user_id
     with sql.connect("database.db") as con:
         cur = con.cursor()
         # if retrieve_user_id(username) == None:   #to be fixed
+        password = hashPass(username, password)
         cur.execute("INSERT INTO users (email, first_name, last_name, password) VALUES (?,?,?,?)", (username, first_name, last_name, password))
         con.commit()
         return cur.lastrowid
