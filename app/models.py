@@ -99,7 +99,7 @@ def retrieve_all_actions(project_id):
     with sql.connect("database.db") as con:
         con.row_factory = sql.Row
         cur = con.cursor()
-        result = cur.execute("SELECT * FROM actions WHERE project_id = ?", (project_id, )).fetchall() 
+        result = cur.execute("SELECT * FROM actions WHERE project_id = ? ORDER BY date(due_date) ASC", (project_id, )).fetchall() 
         return result
 
 def delete_action(action_id):

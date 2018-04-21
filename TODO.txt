@@ -16,18 +16,19 @@ what happens when someone goes straight to /timeline without logging in? we need
 
 POPOVERS
 		make popover from buttons
-	keep popover open on hover over popover
+		keep popover open on hover over popover
 	hover to display more content
 	click to open action focus
 
 SQL UPDATES
 	ability to add empty fields
-	sort by date
+		sort by date
 	add edit/update functionality
 
 FORM SUBMISSIONS WITH POPUPS/TOOLTIPS
 
 SINGLE PAGE APP ROUTING AND HIDE/REVEAL
+	BANISH ALL SUBPAGES
 	(figure out form submissions)
 
 SPACING
