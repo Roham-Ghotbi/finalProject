@@ -18,21 +18,32 @@ POPOVERS
 		make popover from buttons
 		keep popover open on hover over popover
 	hover to display more content
-	click to open action focus
+	click to edit action
 
-SQL UPDATES
+models.py
 	ability to add empty fields
 		sort by date
 	add edit/update functionality
 
-FORM SUBMISSIONS WITH POPUPS/TOOLTIPS
+FORM SUBMISSION POPOVERS
+	create project
+	add action
 
 SINGLE PAGE APP ROUTING AND HIDE/REVEAL
 	BANISH ALL SUBPAGES
 	(figure out form submissions)
 
 SPACING
+	uuuuuuuuhhh how to figure out dynamic spacing
 
 MOVE CSS TO BULMA (OR SOME OTHER FRAMEWORK FOR STYLING AFTER ALL FRONTEND FUNCTIONALITY COMPLETE)
 	(maybe learn SASS)
 
+STILL UNADDRESSED
+	how to store action completed/not_completed
+	how to intuit project_id given action clicked for form submission
+	how to order actions w/o dates
+		how to animate reordering actions
+	different colors for different timelines
+	how to show/hide all tool tips when timeline is clicked
+	accelerated project creation page
