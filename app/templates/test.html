@@ -19,7 +19,26 @@
   <a href="#" title="Header" data-toggle="popover" data-trigger="hover" data-content="Some content">Hover over me</a>
   <a class = "pop" href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
 </div>
-
+<div class="pretty p-default p-round p-fill" data-toggle="popover" data-trigger="hover" data-content="Some content">
+    <input type="checkbox" />
+    <div class="state">
+        <label> </label>
+    </div>
+</div>
+<div>
+    <div tabindex="0"
+     class="pretty p-default p-round p-fill"
+     role="button" 
+     data-toggle="popover" 
+     data-trigger="hover" 
+     title="<h5> action['action_name']</h5>" 
+     data-content="Nonsense">
+<!-- 		<input type="checkbox" />
+ -->	    <div class="state">
+	        <label> </label>
+	    </div>
+     </div>
+    </div>
 <script>
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   

@@ -21,38 +21,41 @@
       <div class="project">
         <h3><a href="{{ url_for('project_focus', value=project['project_name']) }}">{{ project['project_name'] }}</a> 
           <a class="btn btn-primary" role="button" id ="remove" href="{{ url_for('create_action') }}"> + Action</a></h3>
-
-        
-
         <ul>
           {% for action in project['actions']%}
-          <li>
-            <div>
-              <a tabindex="0"
-               class="btn btn-primary pop" 
-               role="button" 
-               data-html="true" 
-               data-toggle="popover" 
-               data-trigger="hover" 
-               title="<h5>{{ action['action_name'] }}</h5>" 
-               data-content="<div>
+          <li class="timeline"></li> <!-- timeline element -->
+          <div
+            tabindex="0" 
+            class="action_button pretty p-default p-round p-fill"
+            data-toggle="popover"
+            data-trigger="hover"
+            data-content="{{ action['action_name'] }}">
+              <input type="checkbox" />
+              <div class="state">
+                  <label> </label>
+              </div>
+          </div>
+          <div>
+            <a tabindex="0"
+             class="btn btn-primary pop" 
+             role="button" 
+             data-html="true" 
+             data-toggle="popover" 
+             data-trigger="hover" 
+             title="<h5>{{ action['action_name'] }}</h5>" 
+             data-content="<div>
                   <h6>{{ action['due_date'] }}</h6>
                   <p>{{ action['description'] }}</p>
                   <a id ='remove' href='{{ url_for('remove_action', value=action['action_id']) }}''> - Action</a>
-              </div>">(O)</a>
-              </div>
-          </li>
+                  </div>">
+            </a>
+            </div>
           {% endfor %}
         </ul>
       </div>
     {% endfor %}
     </div>
   {% endblock %}
-  <script>
-  $(document).ready(function(){
-      $('[data-toggle="popover"]').popover();   
-  });
-  </script>
   </body>
 
 </html>
