@@ -38,6 +38,10 @@ def logout():
     session.pop('first_name', None)
     return redirect('index')
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     signupForm = SignupForm()

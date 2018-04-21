@@ -11,3 +11,19 @@ do security(passswords fixed) and google sign up(for this wI thinkg we need to a
 styling forever
 
 what happens when someone goes straight to /timeline without logging in? we need to handle gracefully and elegantly everywhere
+
+
+
+POPOVERS
+		make popover from buttons
+	keep popover open on hover over popover
+	hover to display more content
+	click to open action focus
+
+IMPLEMENT SINGLE PAGE APP
+	(figure out form submissions)
+
+MOVE CSS TO BULMA
+	(maybe learn SASS)
+
+FORM SUBMISSIONS WITH POPUPS/TOOLTIPS
