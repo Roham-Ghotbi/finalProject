@@ -20,10 +20,18 @@ POPOVERS
 	hover to display more content
 	click to open action focus
 
-IMPLEMENT SINGLE PAGE APP
-	(figure out form submissions)
-
-MOVE CSS TO BULMA
-	(maybe learn SASS)
+SQL UPDATES
+	ability to add empty fields
+	sort by date
+	add edit/update functionality
 
 FORM SUBMISSIONS WITH POPUPS/TOOLTIPS
+
+SINGLE PAGE APP ROUTING AND HIDE/REVEAL
+	(figure out form submissions)
+
+SPACING
+
+MOVE CSS TO BULMA (OR SOME OTHER FRAMEWORK FOR STYLING AFTER ALL FRONTEND FUNCTIONALITY COMPLETE)
+	(maybe learn SASS)
+
