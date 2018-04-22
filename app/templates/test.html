@@ -11,6 +11,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 {% block content %}
 
 <div class="container">
@@ -19,46 +20,72 @@
   <a href="#" title="Header" data-toggle="popover" data-trigger="hover" data-content="Some content">Hover over me</a>
   <a class = "pop" href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
 </div>
-<div class="pretty p-default p-round p-fill" data-toggle="popover" data-trigger="hover" data-content="Some content">
+<div class="project">
+	<!-- Project Focus -->
+	<a href="#" class="project-line"></a>
+	<!-- Action Buttons -->
+	<button class="action-button not_done" data-toggle="popover" 
+	     data-trigger="hover" 
+	     title="<h5> action['action_name']</h5>" 
+	     data-content="Nonsense">	
+	</button>
+	<button class="action-button not_done" data-toggle="popover" 
+	     data-trigger="hover" 
+	     title="<h5> action['action_name']</h5>" 
+	     data-content="Nonsense">	
+	</button>
+	<button class="action-button not_done" data-toggle="popover" 
+	     data-trigger="hover" 
+	     title="<h5> action['action_name']</h5>" 
+	     data-content="Nonsense">	
+	</button>
+	<button class="action-button not_done" data-toggle="popover" 
+	     data-trigger="hover" 
+	     title="<h5> action['action_name']</h5>" 
+	     data-content="Nonsense">	
+	</button>
+	<button class="action-button not_done" data-toggle="popover" 
+	     data-trigger="hover" 
+	     title="<h5> action['action_name']</h5>" 
+	     data-content="Nonsense">	
+	</button>
+	<button class="action-button not_done" data-toggle="popover" 
+	     data-trigger="hover" 
+	     title="<h5> action['action_name']</h5>" 
+	     data-content="Nonsense">	
+	</button>
+</div>
+
+
+
+<!-- <div class="pretty p-default p-round p-fill" data-toggle="popover" data-trigger="hover" data-content="Some content">
     <input type="checkbox" />
     <div class="state">
         <label> </label>
     </div>
-</div>
-<div>
-    <div tabindex="0"
-     class="pretty p-default p-round p-fill"
-     role="button" 
-     data-toggle="popover" 
-     data-trigger="hover" 
-     title="<h5> action['action_name']</h5>" 
-     data-content="Nonsense">
-<!-- 		<input type="checkbox" />
- -->	    <div class="state">
-	        <label> </label>
-	    </div>
-     </div>
-    </div>
+</div> -->
+<!-- 
 <script>
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
+    console.log("help");
+    $(".action-button").on('click', function() {
+        // move from list_todo container to list_doing container
+        console.log($(this).hasClass("done"));
+
+        // $(this).html("Add To To-Do");
+        if ($(this).hasClass("done")) {
+        	$(this).removeClass("done");
+	        $(this).addClass("not_done");
+        } else{
+        	$(this).removeClass("not_done");
+	        $(this).addClass("done");
+        }
+	});
 });
-$(".pop").popover({ trigger: "manual" , html: true, animation:false})
-    .on("mouseenter", function () {
-        var _this = this;
-        $(this).popover("show");
-        $(".popover").on("mouseleave", function () {
-            $(_this).popover('hide');
-        });
-    }).on("mouseleave", function () {
-        var _this = this;
-        setTimeout(function () {
-            if (!$(".popover:hover").length) {
-                $(_this).popover("hide");
-            }
-        }, 300);
-});
-</script>
+ 	
+ </script> -->
+<script src="{{url_for('static', filename='js/test.js')}}"></script>
+
 {% endblock %}
 
 </body>

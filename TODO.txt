@@ -47,3 +47,4 @@ STILL UNADDRESSED
 	different colors for different timelines
 	how to show/hide all tool tips when timeline is clicked
 	accelerated project creation page
+	
