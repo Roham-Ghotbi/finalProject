@@ -3,93 +3,45 @@
 {% extends "base.html" %}
   <body>  
     {% block content %}
-  <div class="container">
-    <form action="logout" id="logout">
-      <span id="username">Logged in as {{ first_name }}</span>
-      <input class="action-button" id="logout-button" type="submit" value="Logout">
-    </form>
-    <div class="row">
-      <h1>What I'm currently working on...</h1>
-      <div class="divider"></div>
-      <div class= "section">
-        <a class="btn btn-primary" role="button" href="{{ url_for('create_project') }}">Add a Project</a>
+      <div class="container">
+        <form action="logout" id="logout">
+          <span id="username">Logged in as {{ first_name }}</span>
+          <input class="btn btn-primary" id="logout-button" type="submit" value="Logout">
+        </form>
+        <div class="row">
+          <h1>What I'm currently working on...</h1>
+          <div class="divider"></div>
+          <div class= "section">
+            <a class="btn btn-primary" role="button" href="{{ url_for('create_project') }}">Add a Project</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-    <div class="row-projects">
-    {% for project in p %}
-      <div class="project">
-        <!-- Project Focus -->
-        <a href="{{ url_for('project_focus', value=project['project_name']) }}" class="project-line"></a>
-        {% for action in project['actions']%}
-          <!-- Action Buttons -->
-            <button class="action-button not_done" data-toggle="popover" 
-                 data-trigger="hover" 
-                 title="{{ action['action_name'] }}" 
-                 data-content="{{ action['description'] }}"> 
-            </button>
-        {% endfor %}
-
-
-        <h3><a href="{{ url_for('project_focus', value=project['project_name']) }}">{{ project['project_name'] }}</a> 
-          <a class="btn btn-primary" role="button" id ="remove" href="{{ url_for('create_action') }}"> + Action</a></h3>
-          <div class="timeline-segment">
-            <a href="{{ url_for('project_focus', value=project['project_name']) }}">
-              <div class="project-line"></div>
-            </a>
-          </div>
-          <!-- <a href="{{ url_for('project_focus', value=project['project_name']) }}">
-              <div class="project-line"></div>
-            </a> -->
-        <ul>
-          {% for action in project['actions']%}
-          
-          <div class="action-segment">
-            <div
-            tabindex="0" 
-            class="action_button pretty p-default p-round p-fill"
-            data-toggle="popover"
-            data-trigger="hover"
-            data-content="{{ action['action_name'] }}">
-              <input type="checkbox" />
-              <div class="state">
-                  <label> </label>
-              </div>
-            </div>
-          </div>
-          <!-- <li class="timeline"></li>  -->
-          <!-- timeline element -->
-          <!-- <div
-            tabindex="0" 
-            class="action_button pretty p-default p-round p-fill"
-            data-toggle="popover"
-            data-trigger="hover"
-            data-content="{{ action['action_name'] }}">
-              <input type="checkbox" />
-              <div class="state">
-                  <label> </label>
-              </div>
-          </div> -->
-          <div>
-            <a tabindex="0"
-             class="btn btn-primary pop" 
-             role="button" 
-             data-html="true" 
-             data-toggle="popover" 
-             data-trigger="hover" 
-             title="<h5>{{ action['action_name'] }}</h5>" 
-             data-content="<div>
-                  <h6>{{ action['due_date'] }}</h6>
-                  <p>{{ action['description'] }}</p>
-                  <a id ='remove' href='{{ url_for('remove_action', value=action['action_id']) }}''> - Action</a>
-                  </div>">
-            </a>
+        <div class="row-projects">
+          {% for project in p %}
+            <div class="project">
+              <!-- Project Focus -->
+              <a href="{{ url_for('project_focus', value=project['project_name']) }}" class="project-line"></a>
+              {% for action in project['actions']%}
+                <!-- Action Buttons -->
+                  <button class="action-button pop not_done" data-toggle="popover" 
+                       data-trigger="hover" 
+                       title="{{ action['action_name'] }}" 
+                       data-content="{{ action['description'] }}"> 
+                  </button>
+                  <button class="action-button pop not_done" data-toggle="popover" 
+                       data-trigger="hover" 
+                       title="{{ action['action_name'] }}" 
+                       data-content="<div>
+                        <h6>{{ action['due_date'] }}</h6>
+                        <p>{{ action['description'] }}</p>
+                        <a id ='remove' href='{{ url_for('remove_action', value=action['action_id']) }}''> - Action</a>
+                        </div>" 
+                  </button>
+              {% endfor %}
             </div>
           {% endfor %}
-        </ul>
-      </div>
-    {% endfor %}
-    </div>
+        </div>
+      <script src="{{url_for('static', filename='js/main.js')}}"></script>
   {% endblock %}
   </body>
 
