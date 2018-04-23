@@ -1,10 +1,18 @@
+/*.popover-header {
+  background: blue;
+}
+.popover{
+    color: red;
+    font-size: 10px;
+}*/
+
 /* Timeline */
 
 .project-line {
   position: absolute;
   z-index: 1;
-  left: 44px;
-  width:6px;
+  left: 45px;
+  width:4px;
   height: 100%;
   background: grey;
 }
@@ -14,9 +22,9 @@
   z-index: 10;
   height: 45px;
   width: 45px;
-  margin: 10px;
+  margin: 0px 10px 20px 10px;
   /*padding: 5px 5px; */
-  border: 2px #383736 solid;
+  border: 4px grey solid;
   border-radius: 50%;
   outline: 0 !important;
   overflow:hidden;
@@ -26,7 +34,7 @@
 }
 
 .done {
-  background: blue;
+  background: grey;
 }
 .not_done{
   background: white;
@@ -51,7 +59,7 @@ h6 {
   flex-basis: 100%;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 500px) {
   .row-projects {
     display: flex;
     flex-direction: row;

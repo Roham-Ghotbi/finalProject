@@ -20,24 +20,31 @@
           {% for project in p %}
             <div class="project">
               <!-- Project Focus -->
-              <a href="{{ url_for('project_focus', value=project['project_name']) }}" class="project-line"></a>
+              <a href="{{ url_for('project_focus', value=project['project_name']) }}" 
+                class="project-line pop" data-toggle="popover" 
+                data-trigger="hover" 
+                data-html="true"
+                data-content="<h5 id = 'project-title'>{{ project['project_name'] }}</h5>" 
+                data-placement="top" ></a>
               {% for action in project['actions']%}
                 <!-- Action Buttons -->
-                  <button class="action-button pop not_done" data-toggle="popover" 
+                  <!-- <button class="action-button pop not_done" data-toggle="popover" 
                        data-trigger="hover" 
                        title="{{ action['action_name'] }}" 
                        data-content="{{ action['description'] }}"> 
-                  </button>
+                  </button> -->
                   <button class="action-button pop not_done" data-toggle="popover" 
                        data-trigger="hover" 
                        title="{{ action['action_name'] }}" 
                        data-content="<div>
-                        <h6>{{ action['due_date'] }}</h6>
-                        <p>{{ action['description'] }}</p>
-                        <a id ='remove' href='{{ url_for('remove_action', value=action['action_id']) }}''> - Action</a>
-                        </div>" 
-                  </button>
+                        {{ action['description'] }}
+                        <br>
+                        <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
+                        <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                        </div>">
+                  </button> 
               {% endfor %}
+              <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a>
             </div>
           {% endfor %}
         </div>

@@ -13,25 +13,28 @@ styling forever
 what happens when someone goes straight to /timeline without logging in? we need to handle gracefully and elegantly everywhere
 
 
+Horizontal Collapse: Click project bar to expand project view 
+Fix project rows to width, center flex box (maybe we don't need flex box)
+
+
+EXPANDING SPANS
+	project focus
+	action focus
 
 POPOVERS
-		make popover from buttons
-		keep popover open on hover over popover
 	hover to display more content
 	click to edit action
 
 models.py
 	ability to add empty fields
-		sort by date
 	add edit/update functionality
 
 FORM SUBMISSION POPOVERS
-	create project
 	add action
 
-SINGLE PAGE APP ROUTING AND HIDE/REVEAL
-	BANISH ALL SUBPAGES
-	(figure out form submissions)
+Separate 
+	create project
+
 
 SPACING
 	uuuuuuuuhhh how to figure out dynamic spacing

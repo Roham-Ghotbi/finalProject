@@ -11,3 +11,9 @@ $(".action-button").on('click', function() {
 	        $(this).addClass("done");
         }
 });
+
+$( init );
+
+function init() {
+  $('#makeMeDraggable').draggable({cancel:false});
+}
