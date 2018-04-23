@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+<!-- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +9,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+  
+
+</head> -->
 <body>
 
 {% block content %}
+<div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">What I'm working on ...</a>
+	      <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{{url_for('logout')}}"><i class="material-icons">MW</i></a></li>
+
+	      </ul>
+      </div>
+    </nav>
+  </div>
 
 <div class="container">
   <h3>Popover Example</h3>
