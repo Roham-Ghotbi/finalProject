@@ -42,6 +42,10 @@ def logout():
 def test():
     return render_template('test.html')
 
+@app.route('/testclean')
+def testclean():
+    return render_template('testclean.html')
+
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     signupForm = SignupForm()

@@ -9,20 +9,22 @@
     </div>
     <form action="logout" id="logout">
       <span id="username">Logged in as {{ first_name }}</span>
-      <input class="action-button" id="logout-button" type="submit" value="Logout">
+      <input class="btn btn-primary" id="logout-button" type="submit" value="Logout">
     </form>
     <div class="row">
-      <a id ="remove" href="{{ url_for('remove_project', value=project['project_id']) }}"> Remove Project</a>
+      
       <h1>{{ project['project_name'] }}</h1>
       <div class="divider"></div>
-      <div class="section">        
+
+      <div class="section">    
+      <a class='btn btn-primary' href="{{ url_for('remove_project', value=project['project_id']) }}"> Delete</a>    
         <table class="striped">
           <thead>
             <tr>
               <th data-field="trip_name">Action Name</th>
               <th data-field="description">Description</th>
               <th data-field="due_date">Due Date</th>
-              <td><a href="{{ url_for('create_action') }}"> + Action</a></td> 
+              <td><a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a></td> 
             </tr>
           </thead>
           {% for action in actions %}
@@ -30,7 +32,7 @@
               <td>{{ action['action_name'] }}</td>
               <td>{{ action['description'] }}</td>
               <td>{{ action['due_date'] }}</td>
-              <td><a id ="remove" href="{{ url_for('remove_action', value=action['action_id']) }}"> - Action</a></td>            
+              <td><a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a></td>            
             </tr>
           {% endfor %}
         </table>
