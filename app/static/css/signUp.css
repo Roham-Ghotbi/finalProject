@@ -1,0 +1,10 @@
+body {
+    background-image: url("background3.png");
+    /*background-repeat: no-repeat;*/
+    background-size: cover;
+}
+
+.section {
+	vertical-align: baseline;
+	text-align: center;
+}

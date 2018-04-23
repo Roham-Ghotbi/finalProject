@@ -18,7 +18,7 @@ $(document).ready(function(){
         });
 
 
-$(".action-button").on('click', function() {
+$(".action-button").on('dblclick', function() {
         // move from list_todo container to list_doing container
         console.log("I'm in action-button");
 
@@ -31,3 +31,4 @@ $(".action-button").on('click', function() {
 	        $(this).addClass("done");
         }
 });
+

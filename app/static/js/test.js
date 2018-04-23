@@ -1,4 +1,4 @@
-$(".action-button").on('click', function() {
+$(".action-button").on('dblclick', function() {
         // move from list_todo container to list_doing container
         console.log("Im in here");
 

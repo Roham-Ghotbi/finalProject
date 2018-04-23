@@ -124,7 +124,7 @@ def create_action(value):
         # project_name = actionForm.project_name.data
         # TODO: how to get project id from project I am clicking from
         project_id = retrieve_project_id(value)
-        insert_action(action_name, description, due_date, project_id)
+        insert_action(action_name, description, due_date, project_id, finished=0)
         return redirect('/timeline')
     return render_template('create_action.html', first_name=session['first_name'], actionForm=actionForm)
 

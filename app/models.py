@@ -87,13 +87,34 @@ def delete_project(project_id):
         # for loop to delete all actions for project
 
 ##### ACTION #####
-def insert_action(action_name, description, due_date, project_id):
+def insert_action(action_name, description, due_date, project_id, finished):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO actions (action_name, description, due_date, project_id) VALUES (?,?,?,?)", (action_name, description, due_date, project_id))
+        cur.execute("INSERT INTO actions (action_name, description, due_date, project_id, finished) VALUES (?,?,?,?,?)", (action_name, description, due_date, project_id, finished))
         con.commit()
         return cur.lastrowid
     # TODO: Add update functionality
+
+def retrieve_action_id(action_name, description, due_date, project_id, finished):
+    with sql.connect("database.db") as con:
+        cur = con.cursor()
+        result = cur.execute("SELECT action_id FROM actions WHERE action_name = ? AND description = ? AND due_date = ? AND project_id = ? AND finished = ?", (action_name, description, due_date, project_id, finished)).fetchone() 
+        return result[0]
+
+def update_action(action_id, action_name, description, due_date, project_id, finished):
+    
+    with sql.connect("database.db") as con:
+        sqlQ = ''' UPDATE actions
+              SET action_name = ? ,
+                  description = ? ,
+                  due_date = ?,
+                  project_id = ?,
+                  finished = ?
+              WHERE action_id = ?'''
+
+        cur = con.cursor()
+        cur.execute(sqlQ, (action_name, description, due_date, project_id, finished, action_id))
+        con.commit()
 
 def retrieve_all_actions(project_id):
     with sql.connect("database.db") as con:

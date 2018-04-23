@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+{% block content %}
+
+<div class="container">
+  <h3>Popover Example</h3>
+  <a href="#" title="Header" data-toggle="popover" data-content="Some content">Click Me</a><br>
+  <a href="#" title="Header" data-toggle="popover" data-trigger="hover" data-content="Some content">Hover over me</a>
+  <a class = "pop" href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
+</div>
+<div class="pretty p-default p-round p-fill" data-toggle="popover" data-trigger="hover" data-content="Some content">
+    <input type="checkbox" />
+    <div class="state">
+        <label> </label>
+    </div>
+</div>
+<div>
+    <div tabindex="0"
+     class="pretty p-default p-round p-fill"
+     role="button" 
+     data-toggle="popover" 
+     data-trigger="hover" 
+     title="<h5> action['action_name']</h5>" 
+     data-content="Nonsense">
+<!-- 		<input type="checkbox" />
+ -->	    <div class="state">
+	        <label> </label>
+	    </div>
+     </div>
+    </div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
+$(".pop").popover({ trigger: "manual" , html: true, animation:false})
+    .on("mouseenter", function () {
+        var _this = this;
+        $(this).popover("show");
+        $(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
+        });
+    }).on("mouseleave", function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!$(".popover:hover").length) {
+                $(_this).popover("hide");
+            }
+        }, 300);
+});
+</script>
+{% endblock %}
+
+</body>
+</html>
