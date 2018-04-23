@@ -41,7 +41,7 @@
                          data-content="<div>
                           {{ action['description'] }}
                           <br>
-                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
+                          <a class='btn btn-primary' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
                           <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
                           </div>">
                     </button>

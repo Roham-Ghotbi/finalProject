@@ -134,6 +134,12 @@ def remove_action(value):
     # TODO: just want to remove element from DOM w/o redirecting
     return redirect('timeline')
 
+@app.route('/edit_action/<value>')
+def edit_action(value):
+    # update_action(value['action_id'], value['action_name'], value['description'], value['due_date'], value['project_id'], value['finished'])
+    # TODO: just want to edit Element from DOM w/o redirecting
+    return redirect('timeline')
+
 
 @app.route('/remove_project/<value>')
 def remove_project(value):
