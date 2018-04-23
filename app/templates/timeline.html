@@ -34,16 +34,29 @@
                        title="{{ action['action_name'] }}" 
                        data-content="{{ action['description'] }}"> 
                   </button> -->
-                  <button class="action-button pop not_done" data-toggle="popover" 
-                       data-trigger="hover" 
-                       title="{{ action['action_name'] }}" 
-                       data-content="<div>
-                        {{ action['description'] }}
-                        <br>
-                        <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
-                        <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
-                        </div>">
-                  </button> 
+                  {% if action['finished'] == "0"%}
+                    <button class="action-button pop not_done" data-toggle="popover" 
+                         data-trigger="hover" 
+                         title="{{ action['action_name'] }}" 
+                         data-content="<div>
+                          {{ action['description'] }}
+                          <br>
+                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
+                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                          </div>">
+                    </button>
+                  {% else %} 
+                    <button class="action-button pop done" data-toggle="popover" 
+                         data-trigger="hover" 
+                         title="{{ action['action_name'] }}" 
+                         data-content="<div>
+                          {{ action['description'] }}
+                          <br>
+                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
+                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                          </div>">
+                    </button>
+                  {% endif %} 
               {% endfor %}
               <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a>
             </div>
