@@ -1,7 +1,15 @@
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();  
     $('.fixed-action-btn').floatingActionButton();
+    $('.project-line').hover(function(){
+        $(this).toggleClass('grey_shadow'); 
+        // how to just attach to this project's action-butttons
+        $('.action-button').toggleClass('grey_shadow');
+        // how to do dynamic color
+        // project['color'] + 'shadow'
+    });
   });
+
 $(".pop").popover({ trigger: "manual" , html: true, animation:false})
     .on("mouseenter", function () {
         var _this = this;
