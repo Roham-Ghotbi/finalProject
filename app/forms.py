@@ -20,7 +20,6 @@ class ActionForm(Form):
     action_name = StringField('action_name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     due_date = DateField('due_date', validators=[DataRequired()])
-    # project_name = StringField('project_name', validators=[DataRequired()]) # need to remove this
 
 class ProjectForm(Form):
     project_name = StringField('action_name', validators=[DataRequired()])

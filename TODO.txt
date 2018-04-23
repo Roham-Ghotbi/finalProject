@@ -44,7 +44,6 @@ MOVE CSS TO BULMA (OR SOME OTHER FRAMEWORK FOR STYLING AFTER ALL FRONTEND FUNCTI
 
 STILL UNADDRESSED
 	how to store action completed/not_completed
-	how to intuit project_id given action clicked for form submission
 	how to order actions w/o dates
 		how to animate reordering actions
 	different colors for different timelines
