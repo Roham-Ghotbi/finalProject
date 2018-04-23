@@ -20,8 +20,8 @@
       <div class="nav-wrapper">
         <a href="#" class="brand-logo">What I'm working on ...</a>
 	      <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{url_for('logout')}}"><i class="material-icons">MW</i></a></li>
-
+            <li><a href="{{url_for('logout')}}"><i class="material-icons">person_pin</i> MW</a></li> 
+            <!-- replace with name icon -->
 	      </ul>
       </div>
     </nav>
@@ -90,7 +90,13 @@
 </div>
 <div class='cloned-slides' id='cloned-slides'></div>
 
-<script src="{{url_for('static', filename='js/test.js')}}"></script>
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red accent-2" href="{{url_for('create_project')}}">
+    <i class="large material-icons">add</i>
+  </a>
+</div>
+
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 
 {% endblock %}
 

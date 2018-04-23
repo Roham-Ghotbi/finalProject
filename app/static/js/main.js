@@ -1,21 +1,22 @@
 $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();   
-      });
-      $(".pop").popover({ trigger: "manual" , html: true, animation:false})
-            .on("mouseenter", function () {
-                var _this = this;
-                $(this).popover("show");
-                $(".popover").on("mouseleave", function () {
-                    $(_this).popover('hide');
-                });
-            }).on("mouseleave", function () {
-                var _this = this;
-                setTimeout(function () {
-                    if (!$(".popover:hover").length) {
-                        $(_this).popover("hide");
-                    }
-                }, 0);
+    $('[data-toggle="popover"]').popover();  
+    $('.fixed-action-btn').floatingActionButton();
+  });
+$(".pop").popover({ trigger: "manual" , html: true, animation:false})
+    .on("mouseenter", function () {
+        var _this = this;
+        $(this).popover("show");
+        $(".popover").on("mouseleave", function () {
+            $(_this).popover('hide');
         });
+    }).on("mouseleave", function () {
+        var _this = this;
+        setTimeout(function () {
+            if (!$(".popover:hover").length) {
+                $(_this).popover("hide");
+            }
+        }, 0);
+});
 
 
 $(".action-button").on('dblclick', function() {
