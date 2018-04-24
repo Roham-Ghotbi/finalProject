@@ -6,10 +6,10 @@ $(document).ready(function(){
     $('.project-line').addClass("bg_"+$(this).data('color'));
     $('.project-line').hover(function(){
         console.log($(this).data('color'));
-        $(this).addClass('grey_shadow'); 
-        // how to just attach to this project's action-butttons
-            // attach a id = project id to both a project + its actions 
-        $('.action-button').addClass('grey_shadow');
+        var x = $(this).data('projectId');
+        console.log('.' + x);
+        $('.' + x).addClass('grey_shadow');
+        $(this).addClass('grey_shadow');
         // how to do dynamic color
         // project['color'] + 'shadow'
 
@@ -21,6 +21,9 @@ $(document).ready(function(){
         $('.action-button').removeClass('grey_shadow');
         $('#title').html("I'm working on ...");
 
+    });
+    $('.action-button').hover(function(){
+        $(this).toggleClass('grey_shadow');
     });
   });
 
