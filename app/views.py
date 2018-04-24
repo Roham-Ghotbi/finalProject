@@ -120,22 +120,6 @@ def create_project():
         return redirect('/timeline')
     return render_template('create_project.html', first_name=session['first_name'], projectForm=projectForm)
 
-# @app.route('/create_action', methods=['GET', 'POST'])
-# def create_action():
-#     actionForm = ActionForm()
-#     if actionForm.validate_on_submit():
-#         action_name = actionForm.action_name.data
-#         description = actionForm.description.data
-#         due_date = actionForm.due_date.data
-#         project_name = actionForm.project_name.data
-#         # TODO: how to get project id from project I am clicking from
-#         project_id = retrieve_project_id(project_name)
-#         project = retrieve_project(project_id)
-#         action_id = insert_action(action_name, description, due_date, project_id)
-#         # actions = 
-#         return render_template('focus.html', first_name=session['first_name'], actions=actions, action_id=action_id,  project=project)
-#    return render_template('create_action.html', actionForm=actionForm)
-
 @app.route('/create_action/<value>', methods=['GET', 'POST'])
 def create_action(value):
     actionForm = ActionForm()

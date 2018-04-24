@@ -5,9 +5,7 @@ $(document).ready(function(){
     initializeColors()
     $('.fixed-action-btn').floatingActionButton();
     $('.project-line').hover(function(){
-        console.log($(this).data('color'));
         var x = $(this).data('projectId');
-        console.log('.' + x);
         $('.' + x).addClass('grey_shadow');
         $(this).addClass('grey_shadow');
         // how to do dynamic color
@@ -33,7 +31,6 @@ $(document).ready(function(){
 function initializeColors(){
     var project_lines = $('.project-line');
     for (var i = project_lines.length - 1; i >= 0; i--) {
-        console.log('border_'+$(project_lines[i]).data('color'));
         var x = 'bg_'+$(project_lines[i]).data('color');
         $(project_lines[i]).addClass(x);
     }
@@ -45,6 +42,20 @@ function initializeColors(){
         }
         $(action_buttons[i]).addClass(x);
     }
+}
+function percentage(projectName) {
+    var action_buttons = $('.action-button');
+    var done = 0
+    var total = 0;
+    for (var i = action_buttons.length - 1; i >= 0; i--) {
+        if ($(action_buttons[i]).data('projectName') === projectName) {
+            total++;
+            if ($(action_buttons[i]).hasClass("done")) {
+                done++;
+            }
+        }
+    }
+    console.log(String(parseInt(100*(done/total))) + "%");
 }
 
 $(".pop").popover({ trigger: "manual" , html: true, animation:false})
@@ -66,14 +77,12 @@ $(".pop").popover({ trigger: "manual" , html: true, animation:false})
 
 $(".action-button").on('dblclick', function() {
         // move from list_todo container to list_doing container
-        console.log($(this).data('color'));
         var actionId = $(this).data('actionId');
-        console.log($(this).data('actionId'));
-        console.log(JSON.stringify({'action_id': actionId}));
 
         // Not Done
         if ($(this).hasClass("bg_" + $(this).data('color'))) {
         	$(this).removeClass("bg_" + $(this).data('color'));
+            $(this).removeClass("done");
             $(this).addClass("not_done");
 	        $(this).addClass("border_" + $(this).data('color'));
             $.ajax({
@@ -84,6 +93,7 @@ $(".action-button").on('dblclick', function() {
         // Done
         } else{
         	$(this).removeClass("not_done");
+            $(this).addClass("done");
 	        $(this).addClass("bg_" + $(this).data('color'));
             $.ajax({
               type: "POST",
@@ -91,6 +101,7 @@ $(".action-button").on('dblclick', function() {
               data: {'action_id': actionId}
             });
         }
+        percentage($(this).data('projectName'));
 });
 
 $(".slides").sortable({
