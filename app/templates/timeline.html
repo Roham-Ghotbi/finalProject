@@ -3,60 +3,65 @@
 {% extends "base.html" %}
   <body>  
     {% block content %}
-      <div class="container">
-        <form action="logout" id="logout">
-          <span id="username">Logged in as {{ first_name }}</span>
-          <input class="btn btn-primary" id="logout-button" type="submit" value="Logout">
-        </form>
-        <div class="row">
-          <h1>What I'm currently working on...</h1>
-          <div class="divider"></div>
-          <div class= "section">
-            <a class="btn btn-primary" role="button" href="{{ url_for('create_project') }}">Add a Project</a>
-          </div>
-        </div>
+    <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <a id="title" class="brand-logo">What I'm working on ...</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="{{url_for('logout')}}"><i class="material-icons tooltipped" data-position="left" data-tooltip="Logout">person_pin</i> MW</a></li> 
+            <!-- replace with name icon -->
+        </ul>
       </div>
-        <div class="row-projects">
-          {% for project in p %}
-            <div class="project">
-              <!-- Project Focus -->
-              <a href="{{ url_for('project_focus', value=project['project_name']) }}" 
-                class="project-line pop" data-toggle="popover" 
-                data-trigger="hover" 
-                data-html="true"
-                data-content="<h5 id = 'project-title'>{{ project['project_name'] }}</h5>" 
-                data-placement="top" ></a>
-              <ul class="slides">
-                {% for action in project['actions']%}
-                  {% if action['finished'] == "0"%}
-                    <li class="slide action-button pop not_done" data-toggle="popover" 
-                         data-trigger="hover" 
-                         title="{{ action['action_name'] }}" 
-                         data-content="<div>
-                          {{ action['description'] }}
-                          <br>
-                          <a class='btn btn-primary' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
-                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
-                          </div>">
-                    </li>
-                  {% else %} 
-                    <li class="slide action-button pop done" data-toggle="popover" 
-                         data-trigger="hover" 
-                         title="{{ action['action_name'] }}" 
-                         data-content="<div>
-                          {{ action['description'] }}
-                          <br>
-                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
-                          <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
-                          </div>">
-                    </li>
-                  {% endif %} 
-                {% endfor %}
-              </ul>
-              <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a>
-            </div>
-          {% endfor %}
+    </nav>
+  </div>
+  <br><br>
+    <div class="row-projects">
+      {% for project in p %}
+        <div class="project">
+          <!-- Project Focus -->
+          <a href="{{ url_for('project_focus', value=project['project_name']) }}" 
+            class="project-line pop" data-toggle="popover" 
+            data-trigger="hover" 
+            data-html="true"
+            data-content="<h5 id = 'project-title'>{{ project['project_name'] }}</h5>" 
+            data-placement="top" 
+            data-project-name="{{ project['project_name'] }}"></a>
+          <ul class="slides">
+            {% for action in project['actions']%}
+              {% if action['finished'] == "0"%}
+                <li class="slide action-button pop not_done" data-toggle="popover" 
+                     data-trigger="hover" 
+                     title="{{ action['action_name'] }}" 
+                     data-content="<div>
+                      {{ action['description'] }}
+                      <br>
+                      <a class='btn btn-primary' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                      </div>">
+                </li>
+              {% else %} 
+                <li class="slide action-button pop done" data-toggle="popover" 
+                     data-trigger="hover" 
+                     title="{{ action['action_name'] }}" 
+                     data-content="<div>
+                      {{ action['description'] }}
+                      <br>
+                      <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
+                      <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                      </div>">
+                </li>
+              {% endif %} 
+            {% endfor %}
+          </ul>
+          <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a>
         </div>
+      {% endfor %}
+    </div>
+    <div class="fixed-action-btn">
+      <a class="btn-floating btn-large red accent-2 tooltipped" data-position="left" data-tooltip="Create Project" href="{{url_for('create_project')}}">
+        <i class="large material-icons">add</i>
+      </a>
+    </div>
       <script src="{{url_for('static', filename='js/main.js')}}"></script>
   {% endblock %}
   </body>

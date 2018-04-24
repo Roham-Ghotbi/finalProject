@@ -1,12 +1,23 @@
 $(document).ready(function(){
+    $('.tooltipped').tooltip();
     $('[data-toggle="popover"]').popover();  
     $('.fixed-action-btn').floatingActionButton();
     $('.project-line').hover(function(){
-        $(this).toggleClass('grey_shadow'); 
+        $(this).addClass('grey_shadow'); 
         // how to just attach to this project's action-butttons
-        $('.action-button').toggleClass('grey_shadow');
+            // attach a id = project id to both a project + its actions 
+        $('.action-button').addClass('grey_shadow');
         // how to do dynamic color
         // project['color'] + 'shadow'
+
+        // change title to 
+        $('#title').html("I'm working on " + $(this).data('projectName'));
+
+    }, function(){
+        $(this).removeClass('grey_shadow'); 
+        $('.action-button').removeClass('grey_shadow');
+        $('#title').html("I'm working on ...");
+
     });
   });
 

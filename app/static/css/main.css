@@ -13,6 +13,18 @@ nav .brand-logo {
 nav ul a {
   color: #5A8CDF;
 }
+
+.project-title {
+  content: "whatever it is you want to add";
+}
+
+/*a.material-tooltip {
+  top: 734px !important;
+}
+
+i.material-tooltip {
+  top: 0px !important;
+}*/
 /*.popover-header {
   background: blue;
 }
