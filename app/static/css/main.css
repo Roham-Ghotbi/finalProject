@@ -14,10 +14,43 @@ nav ul a {
   color: #5A8CDF;
 }
 
-.project-title {
-  content: "whatever it is you want to add";
+.bg_blue {
+  background: blue;
 }
 
+.bg_red {
+  background: red;
+}
+.bg_green {
+  background: green;
+}
+.bg_yellow {
+  background: yellow;
+}
+.bg_cyan {
+  background: cyan;
+}
+.not_done{
+  background: white;
+}
+.border_blue{
+ border: 4px blue solid;
+}
+.border_red{
+  border: 4px red solid;
+}
+.border_yellow{
+  border: 4px yellow solid;
+}
+.border_green{
+    border: 4px green solid;
+}
+.border_purple{
+    border: 4px purpe solid;
+}
+.border_cyan{
+    border: 4px cyan solid;
+}
 /*a.material-tooltip {
   top: 734px !important;
 }
@@ -41,7 +74,7 @@ i.material-tooltip {
   left: 45px;
   width:4px;
   height: 100%;
-  background: grey;
+  /*background: grey;*/
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
 }
@@ -57,7 +90,6 @@ i.material-tooltip {
   width: 45px;
   margin: 0px 10px 20px 10px;
   /*padding: 5px 5px; */
-  border: 4px grey solid;
   border-radius: 50%;
   outline: 0 !important;
   overflow:hidden;

@@ -25,6 +25,7 @@
             data-html="true"
             data-content="<h5 id = 'project-title'>{{ project['project_name'] }}</h5>" 
             data-placement="top" 
+            data-color="{{ project['color'] }}"
             data-project-name="{{ project['project_name'] }}"></a>
           <ul class="slides">
             {% for action in project['actions']%}
@@ -32,6 +33,7 @@
                 <li class="slide action-button pop not_done" data-toggle="popover" 
                      data-trigger="hover" 
                      title="{{ action['action_name'] }}" 
+                     data-color="{{ action['color'] }}"
                      data-content="<div>
                       {{ action['description'] }}
                       <br>
@@ -43,6 +45,7 @@
                 <li class="slide action-button pop done" data-toggle="popover" 
                      data-trigger="hover" 
                      title="{{ action['action_name'] }}" 
+                     data-color="{{ action['color'] }}"
                      data-content="<div>
                       {{ action['description'] }}
                       <br>

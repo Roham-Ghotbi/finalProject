@@ -2,7 +2,10 @@ $(document).ready(function(){
     $('.tooltipped').tooltip();
     $('[data-toggle="popover"]').popover();  
     $('.fixed-action-btn').floatingActionButton();
+    // $('.action-button').addClass('border_'+$(this).data('color'));
+    $('.project-line').addClass("bg_"+$(this).data('color'));
     $('.project-line').hover(function(){
+        console.log($(this).data('color'));
         $(this).addClass('grey_shadow'); 
         // how to just attach to this project's action-butttons
             // attach a id = project id to both a project + its actions 
@@ -40,15 +43,16 @@ $(".pop").popover({ trigger: "manual" , html: true, animation:false})
 
 $(".action-button").on('dblclick', function() {
         // move from list_todo container to list_doing container
-        console.log("I'm in action-button");
+        console.log($(this).data('color'));
 
         // $(this).html("Add To To-Do");
-        if ($(this).hasClass("done")) {
-        	$(this).removeClass("done");
-	        $(this).addClass("not_done");
+        if ($(this).hasClass("bg_" + $(this).data('color'))) {
+        	$(this).removeClass("bg_" + $(this).data('color'));
+            $(this).addClass("not_done");
+	        $(this).addClass("border_" + $(this).data('color'));
         } else{
         	$(this).removeClass("not_done");
-	        $(this).addClass("done");
+	        $(this).addClass("bg_" + $(this).data('color'));
         }
 });
 
