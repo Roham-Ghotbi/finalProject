@@ -3,7 +3,7 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();  
     $('.fixed-action-btn').floatingActionButton();
     // $('.action-button').addClass('border_'+$(this).data('color'));
-    $('.project-line').addClass("bg_"+$(this).data('color'));
+    $('.project-line').addClass("bg_".concat($(this).data('color')));
     $('.project-line').hover(function(){
         console.log($(this).data('color'));
         var x = $(this).data('projectId');
@@ -13,17 +13,21 @@ $(document).ready(function(){
         // how to do dynamic color
         // project['color'] + 'shadow'
 
-        // change title to 
         $('#title').html("I'm working on " + $(this).data('projectName'));
-
     }, function(){
         $(this).removeClass('grey_shadow'); 
         $('.action-button').removeClass('grey_shadow');
         $('#title').html("I'm working on ...");
 
     });
+
     $('.action-button').hover(function(){
-        $(this).toggleClass('grey_shadow');
+        $(this).addClass('grey_shadow');
+        $('#title').html("I'm working on " + $(this).data('projectName'));
+    }, function(){
+        $(this).removeClass('grey_shadow'); 
+        $('#title').html("I'm working on ...");
+
     });
   });
 
