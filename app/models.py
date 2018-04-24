@@ -116,6 +116,28 @@ def update_action(action_id, action_name, description, due_date, project_id, fin
         cur.execute(sqlQ, (action_name, description, due_date, project_id, finished, action_id))
         con.commit()
 
+def update_done(action_id):
+    
+    with sql.connect("database.db") as con:
+        sqlQ = ''' UPDATE actions
+              SET finished = ?
+              WHERE action_id = ?'''
+
+        cur = con.cursor()
+        cur.execute(sqlQ, (True, action_id))
+        con.commit()
+
+def update_not_done(action_id):
+    
+    with sql.connect("database.db") as con:
+        sqlQ = ''' UPDATE actions
+              SET finished = ?
+              WHERE action_id = ?'''
+
+        cur = con.cursor()
+        cur.execute(sqlQ, (False, action_id))
+        con.commit()
+
 def retrieve_all_actions(project_id):
     with sql.connect("database.db") as con:
         con.row_factory = sql.Row

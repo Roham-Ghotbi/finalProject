@@ -1,6 +1,6 @@
 from __future__ import print_function # In python 2.7
 import sys
-from flask import render_template, redirect, request, session, url_for
+from flask import render_template, redirect, request, session, url_for, json
 from app import app, models, db
 from .forms import SignupForm, ActionForm, ProjectForm
 # Access the models file to use SQL functions
@@ -168,6 +168,15 @@ def remove_project(value):
     # TODO: just want to remove element from DOM w/o redirecting
     return redirect('timeline')
 
+@app.route('/toggle_done', methods=['GET','POST'])
+def toggle_done():
+    action_id = request.form['action_id']
+    update_done(action_id)
+    return json.dumps({})
 
-
+@app.route('/toggle_not_done', methods=['GET','POST'])
+def toggle_not_done():
+    action_id = request.form['action_id']
+    update_not_done(action_id)
+    return json.dumps({})
 

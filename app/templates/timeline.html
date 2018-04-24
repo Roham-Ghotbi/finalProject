@@ -33,6 +33,7 @@
               {% if action['finished'] == "0"%}
                 <li class="slide action-button pop not_done {{ action['project_id'] }}" data-toggle="popover " 
                      data-trigger="hover" 
+                     data-action-id="{{ action['action_id'] }}" 
                      title="{{ action['action_name'] }}" 
                      data-color="{{ action['color'] }}"
                      data-project-name="{{ project['project_name'] }}"
@@ -46,6 +47,7 @@
               {% else %} 
                 <li class="slide action-button pop done {{ action['project_id'] }}" data-toggle="popover" 
                      data-trigger="hover" 
+                     data-action-id="{{ action['action_id'] }}" 
                      title="{{ action['action_name'] }}" 
                      data-color="{{ action['color'] }}"
                      data-project-name="{{ project['project_name'] }}"

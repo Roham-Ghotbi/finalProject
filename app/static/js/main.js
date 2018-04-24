@@ -67,15 +67,31 @@ $(".pop").popover({ trigger: "manual" , html: true, animation:false})
 $(".action-button").on('dblclick', function() {
         // move from list_todo container to list_doing container
         console.log($(this).data('color'));
+        var actionId = $(this).data('actionId');
+        console.log($(this).data('actionId'));
+        console.log(JSON.stringify({'action_id': actionId}));
 
-        // $(this).html("Add To To-Do");
+        // Not Done
         if ($(this).hasClass("bg_" + $(this).data('color'))) {
         	$(this).removeClass("bg_" + $(this).data('color'));
             $(this).addClass("not_done");
 	        $(this).addClass("border_" + $(this).data('color'));
+            // $.post( "./toggle_done", {'action_id': actionId});
+            $.ajax({
+              type: "POST",
+              url: "./toggle_not_done",
+              data: {'action_id': actionId}
+            });
+        // Done
         } else{
         	$(this).removeClass("not_done");
 	        $(this).addClass("bg_" + $(this).data('color'));
+            // $.post( "./toggle_done", {'action_id': actionId});
+            $.ajax({
+              type: "POST",
+              url: "./toggle_done",
+              data: {'action_id': actionId}
+            });
         }
 });
 
