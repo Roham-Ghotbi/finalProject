@@ -53,6 +53,28 @@ nav ul a {
     border: 4px cyan solid;
 }
 
+/*.grey_shadow {
+    box-shadow: 0 0 20px rgba(33,33,33,.2)
+}*/
+
+.blue_shadow {
+    box-shadow: 0 0 20px blue
+}
+.red_shadow {
+    box-shadow: 0 0 20px red
+}
+.green_shadow {
+    box-shadow: 0 0 20px green
+}
+.yellow_shadow {
+    box-shadow: 0 0 20px yellow
+}
+.purple_shadow {
+    box-shadow: 0 0 20px purple
+}
+.cyan_shadow {
+    box-shadow: 0 0 20px cyan
+}
 /*a.material-tooltip {
   top: 734px !important;
 }
@@ -78,7 +100,7 @@ i.material-tooltip {
   height: 100%;
   /*background: grey;*/
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
+  transition: box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
 }
 
 .grey_shadow {
@@ -97,7 +119,7 @@ i.material-tooltip {
   overflow:hidden;
   cursor: pointer;
   display: block;
-  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
+  transition: box-shadow 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
 }
 
 .not_done{

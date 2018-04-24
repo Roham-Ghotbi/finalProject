@@ -6,24 +6,36 @@ $(document).ready(function(){
     $('.fixed-action-btn').floatingActionButton();
     $('.project-line').hover(function(){
         var x = $(this).data('projectId');
-        $('.' + x).addClass('grey_shadow');
-        $(this).addClass('grey_shadow');
+        var color = $(this).data('color');
+        var y = color + "_shadow";
+        // action button colors
+        $('.' + x).addClass(y);
+        $(this).addClass(y);
         // how to do dynamic color
         // project['color'] + 'shadow'
 
         $('#title').html("I'm working on " + $(this).data('projectName'));
     }, function(){
-        $(this).removeClass('grey_shadow'); 
-        $('.action-button').removeClass('grey_shadow');
+        var x = $(this).data('projectId');
+        var color = $(this).data('color');
+        var y = color + "_shadow";
+        // action button colors
+        $('.' + x).removeClass(y);
+        $(this).removeClass(y);
         $('#title').html("I'm working on ...");
 
     });
 
     $('.action-button').hover(function(){
-        $(this).addClass('grey_shadow');
+
+        var color = $(this).data('color');
+        var y = color + "_shadow";
+        $(this).addClass(y);
         $('#title').html("I'm working on " + $(this).data('projectName'));
     }, function(){
-        $(this).removeClass('grey_shadow'); 
+        var color = $(this).data('color');
+        var y = color + "_shadow";
+        $(this).removeClass(y);
         $('#title').html("I'm working on ...");
 
     });
