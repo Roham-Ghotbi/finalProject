@@ -1,9 +1,8 @@
 $(document).ready(function(){
     $('.tooltipped').tooltip();
     $('[data-toggle="popover"]').popover();  
+    initializeColors()
     $('.fixed-action-btn').floatingActionButton();
-    // $('.action-button').addClass('border_'+$(this).data('color'));
-    $('.project-line').addClass("bg_".concat($(this).data('color')));
     $('.project-line').hover(function(){
         console.log($(this).data('color'));
         var x = $(this).data('projectId');
@@ -30,6 +29,22 @@ $(document).ready(function(){
 
     });
   });
+function initializeColors(){
+    var project_lines = $('.project-line');
+    for (var i = project_lines.length - 1; i >= 0; i--) {
+        console.log('border_'+$(project_lines[i]).data('color'));
+        var x = 'bg_'+$(project_lines[i]).data('color');
+        $(project_lines[i]).addClass(x);
+    }
+    var action_buttons = $('.action-button')
+    for (var i = action_buttons.length - 1; i >= 0; i--) {
+        var x = 'border_'+$(action_buttons[i]).data('color');
+        if ($(action_buttons[i]).hasClass('done')) {
+            $(action_buttons[i]).addClass("bg_" + $(action_buttons[i]).data('color'));
+        }
+        $(action_buttons[i]).addClass(x);
+    }
+}
 
 $(".pop").popover({ trigger: "manual" , html: true, animation:false})
     .on("mouseenter", function () {
