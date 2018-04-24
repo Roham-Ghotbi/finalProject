@@ -89,11 +89,11 @@ def delete_project(project_id):
 ##### ACTION #####
 def insert_action(action_name, description, due_date, project_id, finished):
     with sql.connect("database.db") as con:
+        # TODO: given project_id return project color and insert into db
         cur = con.cursor()
         cur.execute("INSERT INTO actions (action_name, description, due_date, project_id, finished) VALUES (?,?,?,?,?)", (action_name, description, due_date, project_id, finished))
         con.commit()
         return cur.lastrowid
-    # TODO: Add update functionality
 
 def retrieve_action_id(action_name, description, due_date, project_id, finished):
     with sql.connect("database.db") as con:

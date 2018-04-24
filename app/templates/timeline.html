@@ -63,12 +63,72 @@
         </div>
       {% endfor %}
     </div>
+
+    <!-- Floating Action Button Modal Trigger-->
     <div class="fixed-action-btn">
-      <a class="btn-floating btn-large red accent-2 tooltipped" data-position="left" data-tooltip="Create Project" href="{{url_for('create_project')}}">
-        <i class="large material-icons">add</i>
-      </a>
+      <button data-target="create-action-modal" class="modal-trigger btn-floating btn-large red accent-2 tooltipped" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
     </div>
-      <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    
+    <!-- Create Project Modal Structure -->
+    <div id="create-project-modal" class="modal">
+      <div class="modal-content">
+        <h4>Create a Project</h4>
+        <form method="post" action='{{ url_for("create_project") }}' name="ProjectForm">
+        {{ projectForm.hidden_tag() }}
+        <p>
+          Project Name: <br>
+          {{projectForm.project_name(size=120)}} <br>
+        </p>
+        <p>
+          Description: <br>
+          {{projectForm.description(size=120)}} <br>          
+        </p>
+        <p>
+          Due Date: <br>
+          {{projectForm.due_date(size=120)}} <br>          
+        </p>
+        <p><input class="btn btn-primary" type="submit" value="Create Project"></p>
+      </form>
+      </div>
+    </div>
+
+
+    <!-- Create Action Modal Structure -->
+    <div id="create-action-modal" class="modal">
+      <div class="modal-content">
+        <h4>Add Action</h4>
+        <form method="post" action="{{ url_for('create_action', value='Build a House' ) }}" name="ActionForm">
+          <!-- how to set value here -->
+        {{ actionForm.hidden_tag() }}
+        <p>
+          Action Name: <br>
+          {{actionForm.action_name(size=120)}} <br>
+        </p>
+        <p>
+          Description: <br>
+          {{actionForm.description(size=120)}} <br>          
+        </p>
+        <p>
+          Due Date: <br>
+          {{actionForm.due_date(size=120)}} <br>          
+        </p>
+        <p><input class="btn btn-primary" type="submit" value="Add Action"></p>
+      </form>
+      </div>
+    </div>
+
+    <!-- Edit Action Modal Structure -->
+    <div id="edit-action-modal" class="modal">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
   {% endblock %}
   </body>
 

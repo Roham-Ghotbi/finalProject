@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('.modal').modal();
     $('.tooltipped').tooltip();
     $('[data-toggle="popover"]').popover();  
     initializeColors()

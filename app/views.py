@@ -72,8 +72,29 @@ def display_user_timeline():
         project = dict(project)
         project['actions'] = retrieve_all_actions(project['project_id'])
         p += [project]
-    print(p, file=sys.stderr)
-    return render_template('timeline.html', first_name=session['first_name'], p=p)
+
+    projectForm = ProjectForm()
+    username = session['username']
+    if projectForm.validate_on_submit():
+        user_id = retrieve_user_id(username) 
+        project_name = projectForm.project_name.data
+        description = projectForm.description.data
+        due_date = projectForm.due_date.data
+        insert_project(project_name, description, due_date, user_id)
+        return redirect('/timeline')
+
+    actionForm = ActionForm()
+    if actionForm.validate_on_submit():
+        action_name = actionForm.action_name.data
+        description = actionForm.description.data
+        due_date = actionForm.due_date.data
+        # project_name = actionForm.project_name.data
+        # TODO: how to get project id from project I am clicking from
+        project_id = retrieve_project_id(value)
+        insert_action(action_name, description, due_date, project_id, finished=0)
+        return redirect('/timeline')
+    # print(p, file=sys.stderr)
+    return render_template('timeline.html', first_name=session['first_name'], p=p, projectForm=projectForm, actionForm=actionForm)
 
 
 @app.route('/project_focus/<value>')
