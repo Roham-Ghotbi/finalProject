@@ -25,3 +25,4 @@ class ProjectForm(Form):
     project_name = StringField('action_name', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired()])
     due_date = DateField('due_date', validators=[Optional()])
+    color = StringField('color', validators=[DataRequired()])

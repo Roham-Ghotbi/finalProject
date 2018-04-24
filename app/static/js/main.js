@@ -76,7 +76,6 @@ $(".action-button").on('dblclick', function() {
         	$(this).removeClass("bg_" + $(this).data('color'));
             $(this).addClass("not_done");
 	        $(this).addClass("border_" + $(this).data('color'));
-            // $.post( "./toggle_done", {'action_id': actionId});
             $.ajax({
               type: "POST",
               url: "./toggle_not_done",
@@ -86,7 +85,6 @@ $(".action-button").on('dblclick', function() {
         } else{
         	$(this).removeClass("not_done");
 	        $(this).addClass("bg_" + $(this).data('color'));
-            // $.post( "./toggle_done", {'action_id': actionId});
             $.ajax({
               type: "POST",
               url: "./toggle_done",

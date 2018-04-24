@@ -28,6 +28,9 @@ nav ul a {
 .bg_yellow {
   background: yellow;
 }
+.bg_purple {
+  background: purple;
+}
 .bg_cyan {
   background: cyan;
 }
@@ -37,14 +40,14 @@ nav ul a {
 .border_red{
   border: 4px red solid;
 }
-.border_yellow{
-  border: 4px yellow solid;
-}
 .border_green{
     border: 4px green solid;
 }
+.border_yellow{
+  border: 4px yellow solid;
+}
 .border_purple{
-    border: 4px purpe solid;
+    border: 4px purple solid;
 }
 .border_cyan{
     border: 4px cyan solid;

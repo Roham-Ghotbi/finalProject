@@ -45,10 +45,10 @@ def retrieve_password(username):
 
 ##### PROJECT #####
 
-def insert_project(project_name, description, due_date, user_id):
+def insert_project(project_name, description, due_date, color, user_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("INSERT INTO projects (project_name, description, due_date, user_id) VALUES (?,?,?,?)", (project_name, description, due_date, user_id))
+        cur.execute("INSERT INTO projects (project_name, description, due_date, color, user_id) VALUES (?,?,?,?,?)", (project_name, description, due_date, color, user_id))
         con.commit()
     # TODO: Add update functionality
 
@@ -87,11 +87,11 @@ def delete_project(project_id):
         # for loop to delete all actions for project
 
 ##### ACTION #####
-def insert_action(action_name, description, due_date, project_id, finished):
+def insert_action(action_name, description, due_date, project_id, color, finished):
     with sql.connect("database.db") as con:
         # TODO: given project_id return project color and insert into db
         cur = con.cursor()
-        cur.execute("INSERT INTO actions (action_name, description, due_date, project_id, finished) VALUES (?,?,?,?,?)", (action_name, description, due_date, project_id, finished))
+        cur.execute("INSERT INTO actions (action_name, description, due_date, project_id, color, finished) VALUES (?,?,?,?,?,?)", (action_name, description, due_date, project_id, color, finished))
         con.commit()
         return cur.lastrowid
 

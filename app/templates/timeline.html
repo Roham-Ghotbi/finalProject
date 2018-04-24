@@ -68,7 +68,7 @@
 
     <!-- Floating Action Button Modal Trigger-->
     <div class="fixed-action-btn">
-      <button data-target="create-action-modal" class="modal-trigger btn-floating btn-large red accent-2 tooltipped" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
+      <button data-target="create-project-modal" class="modal-trigger btn-floating btn-large red accent-2 tooltipped" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
     </div>
     
     <!-- Create Project Modal Structure -->
@@ -88,6 +88,10 @@
         <p>
           Due Date: <br>
           {{projectForm.due_date(size=120)}} <br>          
+        </p>
+        <p>
+          Color: <br>
+          {{projectForm.color(size=120)}} <br>          
         </p>
         <p><input class="btn btn-primary" type="submit" value="Create Project"></p>
       </form>
