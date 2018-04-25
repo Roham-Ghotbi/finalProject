@@ -6,15 +6,14 @@
     <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a id="title" class="brand-logo" data-prev-title="I'm working on ..." >I'm working on ...</a>
+        <a id="title" class="brand-logo left" data-prev-title="I'm working on ..." >I'm working on ...</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="{{url_for('logout')}}"><i class="material-icons tooltipped" data-position="left" data-tooltip="Logout">person_pin</i> MW</a></li> 
-            <!-- replace with name icon -->
+            <li><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> MW</a></li> 
+            <!-- replace with user initials icon -->
         </ul>
       </div>
     </nav>
   </div>
-  <br><br>
     <div class="row-projects">
       {% for project in p %}
         <div class="project">
@@ -42,8 +41,8 @@
                       {{ action['action_name'] }}
                       {{ action['description'] }}
                       <br>
-                      <a class='btn btn-flat' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
-                      <a class='btn btn-flat' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                      <a href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
                       ">
                 </li>
               {% else %} 
@@ -56,16 +55,17 @@
                       {{ action['action_name'] }}
                       {{ action['description'] }}
                       <br>
-                      <a class='btn btn-flat' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
-                      <a class='btn btn-flat' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                      <a href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
                       ">
                 </li>
               {% endif %} 
             {% endfor %}
+            <li><button class="action-button text-white done" data-toggle="modal" data-target="#actionModal" data-position="left" data-tooltip="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button></li>
           </ul><!-- 
           <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a> -->
           <!-- TODO: submit project_name using hidden data field in wtform -->
-          <button class="action-button text-white done" data-toggle="modal" data-target="#actionModal" data-position="left" data-tooltip="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button>
+          
         </div>
       {% endfor %}
     </div>

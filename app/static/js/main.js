@@ -3,6 +3,7 @@ $(document).ready(function(){
     $('.tooltipped').tooltip();
     $('[data-toggle="popover"]').popover();  
     initializeColors()
+    initializeHeights()
     $('.fixed-action-btn').floatingActionButton();
     $('.project-line').focusin(function(){
         var projectName = $(this).data('projectName');
@@ -17,7 +18,7 @@ $(document).ready(function(){
                 // open every popover
                 $(action_buttons[i]).popover('show')
                 // disable any accidental triggering 
-                $(action_buttons[i]).data('trigger','none');
+                $(action_buttons[i]).unbind('mouseenter mouseleave');
             }
         }
         console.log($('.btn-floating').data('target'));
@@ -52,7 +53,22 @@ $(document).ready(function(){
                 // close every popover
                 $(action_buttons[i]).popover('hide')
                 // enable regular triggering 
-                $(action_buttons[i]).data('trigger','hover');
+                $(action_buttons[i]).popover({ trigger: "manual" , html: true, animation:true})
+                    .on("mouseenter", function () {
+                        var _this = this;
+                        $(this).popover("show");
+                        $(".popover").on("mouseleave", function () {
+                            console.log('wat')
+                            $(_this).popover('hide');
+                        });
+                    }).on("mouseleave", function () {
+                        var _this = this;
+                        setTimeout(function () {
+                            if (!$(".popover:hover").length) {
+                                $(_this).popover("hide");
+                            }
+                        }, 0);
+                });
             }   
         }
         console.log($('.btn-floating').data('target'));
@@ -136,9 +152,7 @@ function initializeColors(){
     var project_lines = $('.project-line');
     for (var i = project_lines.length - 1; i >= 0; i--) {
         var x = percentage($(project_lines[i]).data('projectName'));
-        console.log(x);
         $(project_lines[i]).attr('data-content',"<font color=" + $(project_lines[i]).data('color') + ">" + x +"</font>");
-
         var x = 'bg_'+$(project_lines[i]).data('color');
         $(project_lines[i]).addClass(x);
     }
@@ -149,6 +163,22 @@ function initializeColors(){
             $(action_buttons[i]).addClass("bg_" + $(action_buttons[i]).data('color'));
         }
         $(action_buttons[i]).addClass(x);
+    }
+}
+
+function initializeHeights(){
+    var project_lines = $('.project-line');
+    var action_buttons = $('.action-button');
+    for (var i = project_lines.length - 1; i >= 0; i--) {
+        projectName = $(project_lines[i]).data('projectName');
+        var count = 0;
+        for (var j = action_buttons.length - 1; j >= 0; j--) {
+            if ($(action_buttons[j]).data('projectName') === projectName) {
+                count++;
+            }
+        }
+        var height =  String(parseInt((count-1)*75)) + "px";
+        $($(project_lines[i])).css("height", height);
     }
 }
 function percentage(projectName) {
@@ -172,7 +202,7 @@ function percentage(projectName) {
     }
 }
 
-$(".pop").popover({ trigger: "manual" , html: true, animation:false})
+$(".pop").popover({ trigger: "manual" , html: true, animation:true})
     .on("mouseenter", function () {
         var _this = this;
         $(this).popover("show");
