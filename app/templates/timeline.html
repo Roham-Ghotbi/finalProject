@@ -62,7 +62,7 @@
                 </li>
               {% endif %} 
             {% endfor %}
-            <li><button class="action-button text-white done tooltipped" data-toggle="modal" data-target="#actionModal" data-position="left" data-tooltip="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button></li>
+            <li><button class="action-button text-white done" data-toggle="tooltip" data-target="#actionModal" data-position="left" title="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button></li>
           </ul><!-- 
           <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a> -->
           <!-- TODO: submit project_name using hidden data field in wtform -->
@@ -73,8 +73,8 @@
 
     <!-- Floating Action Button Modal Trigger-->
     <div class="fixed-action-btn">
-      <button class="btn-floating btn-large red accent-2 tooltipped" 
-      data-toggle="modal" data-target="#projectModal" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
+      <button class="btn-floating btn-large red accent-2 tooltipped modal-trigger" 
+      data-toggle="modal" data-target="projectModal" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
     </div>
 
 
