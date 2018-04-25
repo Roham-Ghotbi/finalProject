@@ -41,7 +41,7 @@ $(document).ready(function(){
         $(this).addClass(y);
 
         // fix title
-        $(this).attr('data-prev-title',"I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+        $('#title').attr('data-prev-title',"I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
 
 
@@ -82,21 +82,21 @@ $(document).ready(function(){
                             }
                         }, 0);
                 });
-                // reular action-button hover functionality
+                // rebind action-button hover functionality
                 $(action_buttons[i]).hover(function(){
 
                     var color = $(this).data('color');
                     var y = color + "_shadow";
                     $(this).addClass(y);
                     $(this).addClass('biggen');
-                    $(this).attr('data-prev-title',$('#title').html());
+                    $('#title').attr('data-prev-title',$('#title').html());
                     $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
                 }, function(){
                     var color = $(this).data('color');
                     var y = color + "_shadow";
                     $(this).removeClass('biggen');
                     $(this).removeClass(y);
-                    $('#title').html($(this).data('prevTitle'));
+                    $('#title').html($('#title').data('prevTitle'));
                 });
             }   
         }
@@ -115,7 +115,7 @@ $(document).ready(function(){
         // fix title
         $('#title').html("I'm working on ...");
 
-        // rebind hover functionality
+        // rebind project-line hover functionality
         $(this).hover(function(){
             var x = $(this).data('projectId');
             var color = $(this).data('color');
@@ -131,7 +131,7 @@ $(document).ready(function(){
                 }
             }
             $(this).popover("show");
-            $(this).attr('data-prev-title',$('#title').html());
+            $('#title').attr('data-prev-title',$('#title').html());
             $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
         }, function(){
             var x = $(this).data('projectId');
@@ -140,7 +140,7 @@ $(document).ready(function(){
             // action button colors
             $('.' + x).removeClass(y);
             $(this).removeClass(y);
-            $('#title').html($(this).data('prevTitle'));
+            $('#title').html($('#title').data('prevTitle'));
             $(this).popover("hide");
             var projectName = $(this).data('projectName');
             var action_buttons = $('.action-button');
@@ -151,7 +151,7 @@ $(document).ready(function(){
             }
         });
     });
-
+    $('#title').attr('data-prev-title',"I'm working on ...");
     // regular project-line hover functionality
     $('.project-line').hover(function(){
         var x = $(this).data('projectId');
@@ -168,7 +168,8 @@ $(document).ready(function(){
                 $(action_buttons[i]).addClass('biggen');
             }
         }
-        $(this).attr('data-prev-title',$('#title').html());
+        var save = $('#title').html()
+        $('#title').attr('data-prev-title',save);
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
     }, function(){
         var x = $(this).data('projectId');
@@ -177,7 +178,8 @@ $(document).ready(function(){
         // action button colors
         $('.' + x).removeClass(y);
         $(this).removeClass(y);
-        $('#title').html($(this).data('prevTitle'));
+        console.log($('#title').data('prevTitle'))
+        $('#title').html($('#title').data('prevTitle'));
         var projectName = $(this).data('projectName');
         var action_buttons = $('.action-button');
         for (var i = action_buttons.length - 1; i >= 0; i--) {
@@ -193,7 +195,7 @@ $(document).ready(function(){
         var color = $(this).data('color');
         var y = color + "_shadow";
         $(this).addClass(y);
-        $(this).attr('data-prev-title',$('#title').html());
+        $('#title').attr('data-prev-title',$('#title').html());
         $(this).addClass('biggen');
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
     }, function(){
@@ -201,7 +203,7 @@ $(document).ready(function(){
         var y = color + "_shadow";
         $(this).removeClass(y);
         $(this).removeClass('biggen');
-        $('#title').html($(this).data('prevTitle'));
+        $('#title').html($('#title').data('prevTitle'));
     });
   });
 function initializeColors(){
