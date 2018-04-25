@@ -95,7 +95,6 @@ i.material-tooltip {
 }*/
 
 /* Timeline */
-
 .project-line {
   position: relative;
   z-index: 1;
@@ -141,6 +140,7 @@ h6 {
 }
 
 /* Grid */
+
 
 .project {
   display: flex;
