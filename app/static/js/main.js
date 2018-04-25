@@ -9,14 +9,19 @@ $(document).ready(function(){
         var projectName = $(this).data('projectName');
         var action_buttons = $('.action-button');
 
-        // take care of popovers
+        $(this).css('z-index',12);
+        $('#fade').css('z-index',11);
+        $('#fade').css('opacity',0.6);
+        // take care of popovers, fade out
         $(this).popover('show');
         $(this).data('trigger','none');
         for (var i = action_buttons.length - 1; i >= 0; i--) {
             if ($(action_buttons[i]).data('projectName')===projectName) {
                 
+                // increase z-index
+                $(action_buttons[i]).css('z-index',13);
                 // open every popover
-                $(action_buttons[i]).popover('show')
+                $(action_buttons[i]).popover('show');
                 // disable any accidental triggering 
                 $(action_buttons[i]).unbind('mouseenter mouseleave');
             }
@@ -38,6 +43,7 @@ $(document).ready(function(){
         $(this).attr('data-prev-title',"I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
 
+
         // unbind hover functionality
         $(this).unbind('mouseenter mouseleave');
     });
@@ -45,11 +51,16 @@ $(document).ready(function(){
         var projectName = $(this).data('projectName');
         var action_buttons = $('.action-button');
 
+        $('#fade').css('opacity',0);
+        $('#fade').css('z-index',1);
+        $(this).css('z-index',2);
         // take care of popovers
         $(this).popover('hide');
         for (var i = action_buttons.length - 1; i >= 0; i--) {
             if ($(action_buttons[i]).data('projectName')===projectName) {
                 
+                // decrease z-index
+                $(action_buttons[i]).css('z-index',3)
                 // close every popover
                 $(action_buttons[i]).popover('hide')
                 // enable regular triggering 
