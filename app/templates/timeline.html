@@ -36,15 +36,15 @@
                 <li class="slide action-button pop not_done {{ action['project_id'] }}" data-toggle="popover " 
                      data-trigger="hover" 
                      data-action-id="{{ action['action_id'] }}" 
-                     title="{{ action['action_name'] }}" 
                      data-color="{{ action['color'] }}"
                      data-project-name="{{ project['project_name'] }}"
-                     data-content="<div>
+                     data-content="
+                      {{ action['action_name'] }}
                       {{ action['description'] }}
                       <br>
-                      <a class='btn btn-primary' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
-                      <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
-                      </div>">
+                      <a class='btn btn-flat' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      <a class='btn btn-flat' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
+                      ">
                 </li>
               {% else %} 
                 <li class="slide action-button pop done {{ action['project_id'] }}" data-toggle="popover" 
@@ -53,12 +53,13 @@
                      title="{{ action['action_name'] }}" 
                      data-color="{{ action['color'] }}"
                      data-project-name="{{ project['project_name'] }}"
-                     data-content="<div>
+                     data-content="
+                      {{ action['action_name'] }}
                       {{ action['description'] }}
                       <br>
-                      <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Edit</a>
+                      <a class='btn btn-primary' href='{{ url_for('edit_action', value=action) }}''>Edit</a>
                       <a class='btn btn-primary' href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
-                      </div>">
+                      ">
                 </li>
               {% endif %} 
             {% endfor %}

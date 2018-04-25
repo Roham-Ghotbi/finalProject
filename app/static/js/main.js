@@ -68,7 +68,7 @@ $(document).ready(function(){
 
 
         // fix title
-        $('#title').html($(this).data('prevTitle'));
+        $('#title').html("I'm working on ...");
 
         // rebind hover functionality
         $(this).hover(function(){
@@ -126,13 +126,13 @@ $(document).ready(function(){
         var color = $(this).data('color');
         var y = color + "_shadow";
         $(this).addClass(y);
-        $('#title').html("I'm working on " + $(this).data('projectName'));
+        $(this).attr('data-prev-title',$('#title').html());
+        $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
     }, function(){
         var color = $(this).data('color');
         var y = color + "_shadow";
         $(this).removeClass(y);
-        $('#title').html("I'm working on ...");
-
+        $('#title').html($(this).data('prevTitle'));
     });
   });
 function initializeColors(){
