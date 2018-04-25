@@ -1,8 +1,8 @@
-/*#demo {
-    -webkit-transition: width 2s ease;
-    -moz-transition: width 2s ease;
-    -o-transition: width 2s ease;
-    transition: width 2s ease;
+#demo {
+    -webkit-transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -moz-transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -o-transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: width 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     
     display: inline-block;
     overflow: hidden;
@@ -16,7 +16,9 @@
 }
 #demo.in {
     width: 220px;
-}*/
+    height: 400px;
+
+}
 
 
 
@@ -60,21 +62,7 @@ body {
     text-align: center;
     color: #FFF;
     border: 2px solid #444;
-    height: 60px;
-}
-
-.slide-placeholder {
-  background: #DADADA;
-  position: relative;
-}
-.slide-placeholder:after {
-  content: " ";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 15px;
-  background-color: #FFF;
+    height: 60px; 
 }
 
 .action-button {

@@ -4,6 +4,102 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();  
     initializeColors()
     $('.fixed-action-btn').floatingActionButton();
+    $('.project-line').focusin(function(){
+        var projectName = $(this).data('projectName');
+        var action_buttons = $('.action-button');
+
+        // take care of popovers
+        $(this).popover('show');
+        $(this).data('trigger','none');
+        for (var i = action_buttons.length - 1; i >= 0; i--) {
+            if ($(action_buttons[i]).data('projectName')===projectName) {
+                
+                // open every popover
+                $(action_buttons[i]).popover('show')
+                // disable any accidental triggering 
+                $(action_buttons[i]).data('trigger','none');
+            }
+        }
+        console.log($('.btn-floating').data('target'));
+        $('.btn-floating').attr('data-target',"actionModal");
+        $('.btn-floating').attr('data-tooltip',"Create Action");
+        console.log($('.btn-floating').data('target'));
+        
+        // highlighting
+        var x = $(this).data('projectId');
+        var color = $(this).data('color');
+        var y = color + "_shadow";
+        // action button colors
+        $('.' + x).addClass(y);
+        $(this).addClass(y);
+
+        // fix title
+        $(this).attr('data-prev-title',$('#title').html());
+        $('#title').html("<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+
+        // unbind hover functionality
+        $(this).unbind('mouseenter mouseleave');
+    });
+    $('.project-line').focusout(function(){
+        var projectName = $(this).data('projectName');
+        var action_buttons = $('.action-button');
+
+        // take care of popovers
+        $(this).popover('hide');
+        for (var i = action_buttons.length - 1; i >= 0; i--) {
+            if ($(action_buttons[i]).data('projectName')===projectName) {
+                
+                // close every popover
+                $(action_buttons[i]).popover('hide')
+                // enable regular triggering 
+                $(action_buttons[i]).data('trigger','hover');
+            }   
+        }
+        console.log($('.btn-floating').data('target'));
+        $('.btn-floating').attr('data-target','projectModal');
+        $('.btn-floating').attr('data-tooltip',"Create Project");
+        console.log($('.btn-floating').data('target'));
+        var x = $(this).data('projectId');
+        var color = $(this).data('color');
+        var y = color + "_shadow";
+        // action button colors
+        $('.' + x).removeClass(y);
+        $(this).removeClass(y);
+
+
+        // fix title
+        $('#title').html($(this).data('prevTitle'));
+
+        // rebind hover functionality
+        $(this).hover(function(){
+            var x = $(this).data('projectId');
+            var color = $(this).data('color');
+            var y = color + "_shadow";
+            // action button colors
+            $('.' + x).addClass(y);
+            $(this).addClass(y);
+            // how to do dynamic color
+            // project['color'] + 'shadow'
+            $(this).popover("show");
+            $(this).attr('data-prev-title',$('#title').html());
+            $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+        }, function(){
+            var x = $(this).data('projectId');
+            var color = $(this).data('color');
+            var y = color + "_shadow";
+            // action button colors
+            $('.' + x).removeClass(y);
+            $(this).removeClass(y);
+            $('#title').html($(this).data('prevTitle'));
+            $(this).popover("hide");
+
+        });
+    });
+//     $(".btn-primary").on("click", function () {
+//     $('#testButton').attr('data-target','#testModal2');
+// });
+
+
     $('.project-line').hover(function(){
         var x = $(this).data('projectId');
         var color = $(this).data('color');
@@ -11,10 +107,9 @@ $(document).ready(function(){
         // action button colors
         $('.' + x).addClass(y);
         $(this).addClass(y);
-        // how to do dynamic color
-        // project['color'] + 'shadow'
 
-        $('#title').html("I'm working on " + $(this).data('projectName'));
+        $(this).attr('data-prev-title',$('#title').html());
+        $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
     }, function(){
         var x = $(this).data('projectId');
         var color = $(this).data('color');
@@ -22,7 +117,7 @@ $(document).ready(function(){
         // action button colors
         $('.' + x).removeClass(y);
         $(this).removeClass(y);
-        $('#title').html("I'm working on ...");
+        $('#title').html($(this).data('prevTitle'));
 
     });
 
@@ -43,6 +138,10 @@ $(document).ready(function(){
 function initializeColors(){
     var project_lines = $('.project-line');
     for (var i = project_lines.length - 1; i >= 0; i--) {
+        var x = percentage($(project_lines[i]).data('projectName'));
+        console.log(x);
+        $(project_lines[i]).attr('data-content',"<font color=" + $(project_lines[i]).data('color') + ">" + x +"</font>");
+
         var x = 'bg_'+$(project_lines[i]).data('color');
         $(project_lines[i]).addClass(x);
     }
@@ -57,6 +156,7 @@ function initializeColors(){
 }
 function percentage(projectName) {
     var action_buttons = $('.action-button');
+
     var done = 0
     var total = 0;
     for (var i = action_buttons.length - 1; i >= 0; i--) {
@@ -67,7 +167,12 @@ function percentage(projectName) {
             }
         }
     }
-    console.log(String(parseInt(100*(done/total))) + "%");
+    if (total==1) {
+        return "0%"
+    } else{
+        // if impplmenting create action like this, need to keep -1
+        return String(parseInt(100*((done-1)/(total-1)))) + "%";   
+    }
 }
 
 $(".pop").popover({ trigger: "manual" , html: true, animation:false})
@@ -113,7 +218,10 @@ $(".action-button").on('dblclick', function() {
               data: {'action_id': actionId}
             });
         }
-        percentage($(this).data('projectName'));
+        var x = percentage($(this).data('projectName'));
+        var sel = ".project-line[data-project-name= '" + $(this).data('projectName') + "']";
+        console.log(sel);
+        $(sel).attr('data-content',"<font color=" + $(this).data('color') + ">" + x +"</font>");
 });
 
 $(".slides").sortable({

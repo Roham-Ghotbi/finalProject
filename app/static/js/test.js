@@ -1,26 +1,32 @@
 $(document).ready(function(){
-    $('[data-toggle="popover"]').popover();  
+    $('[data-toggle="<popove></popove>r"]').popover();  
+    $("[data-toggle='toggle']").click(function() {
+    var selector = $(this).data("target");
+    $(selector).toggleClass('in');
+    });
+
+    // var hideWidth = '-490px'; //width that will be hidden
+    // var collapsibleEl = $('.collapsible'); //collapsible element
+    // var buttonEl =  $(".collapsible button"); //button inside element
+
+    // collapsibleEl.css({'margin-left': hideWidth}); //on page load we'll move and hide part of elements
+    
+    // $(buttonEl).click(function()
+    // {
+    //     var curwidth = $(this).parent().offset(); //get offset value of the element
+    //     if(curwidth.left>0) //compare margin-left value
+    //     {
+    //         //animate margin-left value to -490px
+    //         $(this).parent().animate({marginLeft: hideWidth}, 300 );
+    //         $(this).html('&raquo;'); //change text of button
+    //     }else{
+    //         //animate margin-left value 0px
+    //         $(this).parent().animate({marginLeft: "0"}, 300 );  
+    //         $(this).html('&laquo;'); //change text of button
+    //     }
+    // });
+
   });
-
-$(".action-button").on('dblclick', function() {
-        // move from list_todo container to list_doing container
-        console.log("Im in here");
-
-        // $(this).html("Add To To-Do");
-        if ($(this).hasClass("done")) {
-        	$(this).removeClass("done");
-	        $(this).addClass("not_done");
-        } else{
-        	$(this).removeClass("not_done");
-	        $(this).addClass("done");
-        }
-});
-
-$( init );
-
-function init() {
-  $('#makeMeDraggable').draggable({cancel:false});
-}
 
 $(".pop").popover({ trigger: "manual" , html: true, animation:false})
     .on("mouseenter", function () {
@@ -36,39 +42,4 @@ $(".pop").popover({ trigger: "manual" , html: true, animation:false})
                 $(_this).popover("hide");
             }
         }, 0);
-});
-
-$(".slides").sortable({
-    placeholder: 'slide-placeholder',
-    axis: "y",
-    revert: 150,
-    start: function(e, ui){
-        
-        placeholderHeight = ui.item.outerHeight();
-        ui.placeholder.height(placeholderHeight + 15);
-        $('<div class="slide-placeholder-animator" data-height="' + placeholderHeight + '"></div>').insertAfter(ui.placeholder);
-    
-    },
-    change: function(event, ui) {
-        
-        ui.placeholder.stop().height(0).animate({
-            height: ui.item.outerHeight() + 15
-        }, 300);
-        
-        placeholderAnimatorHeight = parseInt($(".slide-placeholder-animator").attr("data-height"));
-        
-        $(".slide-placeholder-animator").stop().height(placeholderAnimatorHeight + 15).animate({
-            height: 0
-        }, 300, function() {
-            $(this).remove();
-            placeholderHeight = ui.item.outerHeight();
-            $('<div class="slide-placeholder-animator" data-height="' + placeholderHeight + '"></div>').insertAfter(ui.placeholder);
-        });
-        
-    },
-    stop: function(e, ui) {
-        
-        $(".slide-placeholder-animator").remove();
-        
-    },
 });

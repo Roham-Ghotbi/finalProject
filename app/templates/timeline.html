@@ -6,7 +6,7 @@
     <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <a id="title" class="brand-logo">What I'm working on ...</a>
+        <a id="title" class="brand-logo" data-prev-title="I'm working on ..." >I'm working on ...</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="{{url_for('logout')}}"><i class="material-icons tooltipped" data-position="left" data-tooltip="Logout">person_pin</i> MW</a></li> 
             <!-- replace with name icon -->
@@ -19,12 +19,14 @@
       {% for project in p %}
         <div class="project">
           <!-- Project Focus -->
-          <a href="{{ url_for('project_focus', value=project['project_name']) }}" 
-            class="project-line pop" data-toggle="popover" 
+          <a href="#" 
+            class="project-line pop" 
+            id="percentage"
+            data-toggle="popover" 
             data-trigger="hover" 
             data-html="true"
-            data-content="<h5 id = 'project-title'>{{ project['project_name'] }}</h5>" 
-            data-placement="top" 
+            data-content="<font color={{ project['color'] }}>This is some text!</font>" 
+'           data-placement="top" 
             data-color="{{ project['color'] }}"
             data-project-id="{{ project['project_id'] }}"
             data-project-name="{{ project['project_name'] }}"></a>
@@ -60,19 +62,45 @@
                 </li>
               {% endif %} 
             {% endfor %}
-          </ul>
-          <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a>
+          </ul><!-- 
+          <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a> -->
+          <!-- TODO: submit project_name using hidden data field in wtform -->
+          <button class="action-button text-white done" data-toggle="modal" data-target="#actionModal" data-position="left" data-tooltip="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button>
         </div>
       {% endfor %}
     </div>
 
     <!-- Floating Action Button Modal Trigger-->
     <div class="fixed-action-btn">
-      <button data-target="create-project-modal" class="modal-trigger btn-floating btn-large red accent-2 tooltipped" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
+      <button class="btn-floating btn-large red accent-2 tooltipped" 
+      data-toggle="modal" data-target="#projectModal" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
     </div>
-    
+
+
+<button class="btn btn-primary">Change modal</button>
+
+<button id='testButton' data-toggle="modal" data-target="#testModal1" class="btn btn-success">
+  Test
+</button>
+
+<div class="modal fade" id="testModal1" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      Testing Testing 1
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="create-project-modal" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      Testing Testing 2
+    </div>
+  </div>
+</div>
+
     <!-- Create Project Modal Structure -->
-    <div id="create-project-modal" class="modal">
+    <div class="modal fade" id="projectModal">
       <div class="modal-content">
         <h4>Create a Project</h4>
         <form method="post" action='{{ url_for("create_project") }}' name="ProjectForm">
@@ -100,7 +128,7 @@
 
 
     <!-- Create Action Modal Structure -->
-    <div id="create-action-modal" class="modal">
+    <div class="modal" id="actionModal" >
       <div class="modal-content">
         <h4>Add Action</h4>
         <form method="post" action="{{ url_for('create_action', value='Build a House' ) }}" name="ActionForm">
