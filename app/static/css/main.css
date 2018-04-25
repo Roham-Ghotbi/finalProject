@@ -1,13 +1,13 @@
 /*Navbar*/
 nav {
-    background-color: red accent-2;
+    background-color: white;
     /*height: 56px;*/
     /*line-height: 56px;*/
 }
 
 nav .brand-logo {
   padding-left: 20px;
-  color: #5A8CDF;
+  color: black !important;
 }
 
 nav ul a {
@@ -99,7 +99,7 @@ i.material-tooltip {
 .project-line {
   position: absolute;
   z-index: 1;
-  left: 45px;
+  left: 40px;
   width:4px;
   height: 100%;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
@@ -110,9 +110,9 @@ i.material-tooltip {
 .action-button {
   position: relative;
   z-index: 10;
-  height: 45px;
-  width: 45px;
-  margin: 0px 10px 20px 10px;
+  height: 35px;
+  width: 35px;
+  margin: 0px 10px 40px 10px;
   /*padding: 5px 5px; */
   border-radius: 50%;
   outline: 0 !important;
@@ -167,7 +167,7 @@ h6 {
 /* Style */
 
 body {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Futura', sans-serif;
   font-size: 1.3em;
   color: 'black';
   background: 'white';

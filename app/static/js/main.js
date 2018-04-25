@@ -34,8 +34,8 @@ $(document).ready(function(){
         $(this).addClass(y);
 
         // fix title
-        $(this).attr('data-prev-title',$('#title').html());
-        $('#title').html("<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+        $(this).attr('data-prev-title',"I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+        $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
 
         // unbind hover functionality
         $(this).unbind('mouseenter mouseleave');
@@ -95,9 +95,6 @@ $(document).ready(function(){
 
         });
     });
-//     $(".btn-primary").on("click", function () {
-//     $('#testButton').attr('data-target','#testModal2');
-// });
 
 
     $('.project-line').hover(function(){
