@@ -24,6 +24,7 @@ $(document).ready(function(){
                 $(action_buttons[i]).popover('show');
                 // disable any accidental triggering 
                 $(action_buttons[i]).unbind('mouseenter mouseleave');
+
             }
         }
         console.log($('.btn-floating').data('target'));
@@ -59,6 +60,7 @@ $(document).ready(function(){
         for (var i = action_buttons.length - 1; i >= 0; i--) {
             if ($(action_buttons[i]).data('projectName')===projectName) {
                 
+                $(action_buttons[i]).removeClass('biggen');
                 // decrease z-index
                 $(action_buttons[i]).css('z-index',3)
                 // close every popover
@@ -79,6 +81,22 @@ $(document).ready(function(){
                                 $(_this).popover("hide");
                             }
                         }, 0);
+                });
+                // reular action-button hover functionality
+                $(action_buttons[i]).hover(function(){
+
+                    var color = $(this).data('color');
+                    var y = color + "_shadow";
+                    $(this).addClass(y);
+                    $(this).addClass('biggen');
+                    $(this).attr('data-prev-title',$('#title').html());
+                    $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+                }, function(){
+                    var color = $(this).data('color');
+                    var y = color + "_shadow";
+                    $(this).removeClass('biggen');
+                    $(this).removeClass(y);
+                    $('#title').html($(this).data('prevTitle'));
                 });
             }   
         }
@@ -105,8 +123,13 @@ $(document).ready(function(){
             // action button colors
             $('.' + x).addClass(y);
             $(this).addClass(y);
-            // how to do dynamic color
-            // project['color'] + 'shadow'
+            var projectName = $(this).data('projectName');
+            var action_buttons = $('.action-button');
+            for (var i = action_buttons.length - 1; i >= 0; i--) {
+                if ($(action_buttons[i]).data('projectName')===projectName) {
+                    $(action_buttons[i]).addClass('biggen');
+                }
+            }
             $(this).popover("show");
             $(this).attr('data-prev-title',$('#title').html());
             $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
@@ -119,11 +142,17 @@ $(document).ready(function(){
             $(this).removeClass(y);
             $('#title').html($(this).data('prevTitle'));
             $(this).popover("hide");
-
+            var projectName = $(this).data('projectName');
+            var action_buttons = $('.action-button');
+            for (var i = action_buttons.length - 1; i >= 0; i--) {
+                if ($(action_buttons[i]).data('projectName')===projectName) {
+                    $(action_buttons[i]).addClass('biggen');
+                }
+            }
         });
     });
 
-
+    // regular project-line hover functionality
     $('.project-line').hover(function(){
         var x = $(this).data('projectId');
         var color = $(this).data('color');
@@ -132,6 +161,13 @@ $(document).ready(function(){
         $('.' + x).addClass(y);
         $(this).addClass(y);
 
+        var projectName = $(this).data('projectName');
+        var action_buttons = $('.action-button');
+        for (var i = action_buttons.length - 1; i >= 0; i--) {
+            if ($(action_buttons[i]).data('projectName')===projectName) {
+                $(action_buttons[i]).addClass('biggen');
+            }
+        }
         $(this).attr('data-prev-title',$('#title').html());
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
     }, function(){
@@ -142,20 +178,29 @@ $(document).ready(function(){
         $('.' + x).removeClass(y);
         $(this).removeClass(y);
         $('#title').html($(this).data('prevTitle'));
-
+        var projectName = $(this).data('projectName');
+        var action_buttons = $('.action-button');
+        for (var i = action_buttons.length - 1; i >= 0; i--) {
+            if ($(action_buttons[i]).data('projectName')===projectName) {
+                $(action_buttons[i]).removeClass('biggen');
+            }
+        }
     });
 
+    // reular action-button hover functionality
     $('.action-button').hover(function(){
 
         var color = $(this).data('color');
         var y = color + "_shadow";
         $(this).addClass(y);
         $(this).attr('data-prev-title',$('#title').html());
+        $(this).addClass('biggen');
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
     }, function(){
         var color = $(this).data('color');
         var y = color + "_shadow";
         $(this).removeClass(y);
+        $(this).removeClass('biggen');
         $('#title').html($(this).data('prevTitle'));
     });
   });
