@@ -7,9 +7,11 @@
     <nav>
       <div class="nav-wrapper">
         <a id="title" class="brand-logo left" >I'm working on ...</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> MW</a></li> 
+        <ul id="nav" class="right">
+            <li id="date"> 1-2  month guesstimate • Aug 27 Launch Goal </li> 
             <!-- replace with user initials icon -->
+            <li><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> MW</a></li>
+            <li><br></li>
         </ul>
       </div>
     </nav>
@@ -54,51 +56,32 @@
                      data-project-name="{{ project['project_name'] }}"
                      data-content="
                       {{ action['action_name'] }}
-                      {{ action['description'] }}
                       <br>
-                      <a href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      {{ action['due_date'] }} <a href='{{ url_for('edit_action', value=action) }}''>Edit</a>
                       <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
                       ">
                 </li>
               {% endif %} 
             {% endfor %}
-            <li><button class="action-button text-white done" data-toggle="tooltip" data-target="#actionModal" data-position="left" title="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button></li>
-          </ul><!-- 
-          <a class="btn btn-primary" role="button" href="{{ url_for('create_action',value=project['project_name'] ) }}">+</a> -->
-          <!-- TODO: submit project_name using hidden data field in wtform -->
+            <li>
+              <button class="action-button add-button text-white done modal-trigger" 
+                data-toggle="modal" data-trigger="hover" data-target="actionModal" data-content="Add Action" data-project-name="{{ project['project_name'] }}" data-color="{{ project['color'] }}">+</button>
+
+          </ul>
           
         </div>
       {% endfor %}
     </div>
 
-    <!-- Floating Action Button Modal Trigger-->
-    <div class="fixed-action-btn">
-      <button class="btn-floating btn-large red accent-2 tooltipped modal-trigger" 
-      data-toggle="modal" data-target="projectModal" data-position="left" data-tooltip="Create Project"><i class="large material-icons">add</i></button>
+
+    <div class="fixed-action-btn" id = "create_action">
+      <button  class="btn-floating btn-large red accent-2 tooltipped modal-trigger" 
+      data-toggle="modal" data-target="actionModal" data-position="left"><i class="large material-icons">add</i></button>
     </div>
-
-
-<button class="btn btn-primary">Change modal</button>
-
-<button id='testButton' data-toggle="modal" data-target="#testModal1" class="btn btn-success">
-  Test
-</button>
-
-<div class="modal fade" id="testModal1" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      Testing Testing 1
+    <div class="fixed-action-btn" id = "create_project">
+      <button  class="btn-floating btn-large red accent-2 tooltipped modal-trigger" 
+      data-toggle="modal" data-target="projectModal" data-position="left" data-tooltip="Create Project"><i class="large material-icons">create</i></button>
     </div>
-  </div>
-</div>
-
-<div class="modal fade" id="create-project-modal" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      Testing Testing 2
-    </div>
-  </div>
-</div>
 
     <!-- Create Project Modal Structure -->
     <div class="modal fade" id="projectModal">
@@ -106,22 +89,18 @@
         <h4>Create a Project</h4>
         <form method="post" action='{{ url_for("create_project") }}' name="ProjectForm">
         {{ projectForm.hidden_tag() }}
-        <p>
-          Project Name: <br>
-          {{projectForm.project_name(size=120)}} <br>
-        </p>
-        <p>
-          Description: <br>
-          {{projectForm.description(size=120)}} <br>          
-        </p>
-        <p>
-          Due Date: <br>
-          {{projectForm.due_date(size=120)}} <br>          
-        </p>
-        <p>
-          Color: <br>
-          {{projectForm.color(size=120)}} <br>          
-        </p>
+          <div>
+            {{projectForm.project_name(size=120)}}
+          </div>
+          <div>
+            {{projectForm.description(size=120)}}
+          </div>
+          <div>
+            {{projectForm.due_date(size=120)}}
+          </div>
+          <div>
+            {{projectForm.color}}
+          </div>
         <p><input class="btn btn-primary" type="submit" value="Create Project"></p>
       </form>
       </div>
@@ -133,20 +112,18 @@
       <div class="modal-content">
         <h4>Add Action</h4>
         <form method="post" action="{{ url_for('create_action', value='Build a House' ) }}" name="ActionForm">
-          <!-- how to set value here -->
+          how to set value here
         {{ actionForm.hidden_tag() }}
-        <p>
-          Action Name: <br>
-          {{actionForm.action_name(size=120)}} <br>
-        </p>
-        <p>
-          Description: <br>
-          {{actionForm.description(size=120)}} <br>          
-        </p>
-        <p>
-          Due Date: <br>
-          {{actionForm.due_date(size=120)}} <br>          
-        </p>
+        <div>
+          {{actionForm.action_name(size=120)}}
+        </div>
+        <div>
+          {{actionForm.description(size=120)}}
+        </div>
+        <div>
+          {{actionForm.due_date(size=120)}}
+        </div>
+        <input style="display:none;" class="hidden_input" id="project_name" name="project_name" value="" />
         <p><input class="btn btn-primary" type="submit" value="Add Action"></p>
       </form>
       </div>

@@ -2,9 +2,12 @@ $(document).ready(function(){
     $('.modal').modal();
     $('.tooltipped').tooltip();
     $('[data-toggle="popover"]').popover();  
+    $('.add-button').popover();  
     initializeColors()
     initializeHeights()
     $('.fixed-action-btn').floatingActionButton();
+
+    // Project Focus Functionality
     $('.project-line').focusin(function(){
         var projectName = $(this).data('projectName');
         var action_buttons = $('.action-button');
@@ -28,7 +31,7 @@ $(document).ready(function(){
             }
         }
         console.log($('.btn-floating').data('target'));
-        $('.btn-floating').attr('data-target',"actionModal");
+        $('div#create_project').css('z-index', 1);
         $('.btn-floating').attr('data-tooltip',"Create Action");
         console.log($('.btn-floating').data('target'));
         
@@ -43,6 +46,10 @@ $(document).ready(function(){
         // fix title
         $('#title').attr('data-prev-title',"I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+
+        // date/login icon
+        // $('nav li').attr('data-prev-title',);
+        // $('nav li').html('
 
 
         // unbind hover functionality
@@ -101,7 +108,7 @@ $(document).ready(function(){
             }   
         }
         console.log($('.btn-floating').data('target'));
-        $('.btn-floating').attr('data-target','projectModal');
+        // $('div#create_project').css('z-index', 1000);
         $('.btn-floating').attr('data-tooltip',"Create Project");
         console.log($('.btn-floating').data('target'));
         var x = $(this).data('projectId');
@@ -206,6 +213,13 @@ $(document).ready(function(){
         $('#title').html($('#title').data('prevTitle'));
     });
   });
+
+
+$('.add-button').on('click', function(){
+    var theValue = $(this).data('projectName');
+    $('.hidden_input').val(theValue);
+});
+
 function initializeColors(){
     var project_lines = $('.project-line');
     for (var i = project_lines.length - 1; i >= 0; i--) {

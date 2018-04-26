@@ -88,12 +88,12 @@ def display_user_timeline():
         action_name = actionForm.action_name.data
         description = actionForm.description.data
         due_date = actionForm.due_date.data
-        # project_name = actionForm.project_name.data
+        project_name = actionForm.project_name.data
+        print(project_name, file=sys.stderr)
         # TODO: how to get project id from project I am clicking from
         project_id = retrieve_project_id(value)
         insert_action(action_name, description, due_date, project_id, finished=0)
         return redirect('/timeline')
-    # print(p, file=sys.stderr)
     return render_template('timeline.html', first_name=session['first_name'], p=p, projectForm=projectForm, actionForm=actionForm)
 
 
@@ -127,10 +127,13 @@ def create_action(value):
         action_name = actionForm.action_name.data
         description = actionForm.description.data
         due_date = actionForm.due_date.data
-        # project_name = actionForm.project_name.data
+        project_name = actionForm.project_name.data
+        print(project_name, file=sys.stderr)
         # TODO: how to get project id from project I am clicking from
-        project_id = retrieve_project_id(value)
+        project_id = retrieve_project_id(project_name)
+        print(project_id, file=sys.stderr)
         color = retrieve_project(project_id)['color']
+        print(color, file=sys.stderr)
         insert_action(action_name, description, due_date, project_id, color, finished=0)
         return redirect('/timeline')
     return render_template('create_action.html', first_name=session['first_name'], actionForm=actionForm)

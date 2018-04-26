@@ -1,8 +1,26 @@
+:root {
+  --red: #EF6B68;
+  --blue: #5A8CDF;
+  --green: #7CB342;
+  --yellow: #FAC95B;
+  --purple: #A172ED;
+  --cyan: #8ECEC3;
+  /*--orange: #00b;*/
+}
+
+.red.accent-2 {
+    background-color: var(--red) !important;
+}
+
+.modal {
+  box-shadow: unset !important;
+  background-color: unset !important;
+  max-height: 45% !important;
+}
+
 /*Navbar*/
 nav {
     background-color: white;
-    /*height: 56px;*/
-    /*line-height: 56px;*/
 }
 
 nav .brand-logo {
@@ -10,6 +28,13 @@ nav .brand-logo {
   color: black !important;
 }
 
+nav li {
+  color: #5A8CDF;
+}
+#date {
+  font-family: 'FuturaLight', sans-serif;
+  padding: 3px;
+}
 nav ul a {
   color: #5A8CDF;
 }
@@ -17,63 +42,62 @@ nav ul a {
 /*Colors*/
 
 .bg_blue {
-  background: blue;
+  background: var(--blue);
 }
 .bg_red {
-  background: red;
+  background: var(--red);
 }
 .bg_green {
-  background: green;
+  background: var(--green);
 }
 .bg_yellow {
-  background: yellow;
+  background: var(--yellow);
 }
 .bg_purple {
-  background: purple;
+  background: var(--purple);
 }
 .bg_cyan {
-  background: cyan;
+  background: var(--cyan);
 }
 .border_blue{
- border: 4px blue solid;
+ border: 4px var(--blue) solid;
 }
 .border_red{
-  border: 4px red solid;
+  border: 4px var(--red) solid;
 }
 .border_green{
-    border: 4px green solid;
+    border: 4px var(--green) solid;
 }
 .border_yellow{
-  border: 4px yellow solid;
+  border: 4px var(--yellow) solid;
 }
 .border_purple{
-    border: 4px purple solid;
+    border: 4px var(--purple) solid;
 }
 .border_cyan{
-    border: 4px cyan solid;
+    border: 4px var(--cyan) solid;
 }
-
-/*.grey_shadow {
-    box-shadow: 0 0 20px rgba(33,33,33,.2)
+/*apply only to action buttons*/
+/*.popover .arrow {
+    display: none;
 }*/
-
 .blue_shadow {
-    box-shadow: 0 0 20px blue !important;
+    box-shadow: 0 0 20px var(--blue) !important;
 }
 .red_shadow {
-    box-shadow: 0 0 20px red !important;
+    box-shadow: 0 0 20px var(--red) !important;
 }
 .green_shadow {
-    box-shadow: 0 0 20px green !important;
+    box-shadow: 0 0 20px var(--green) !important;
 }
 .yellow_shadow {
-    box-shadow: 0 0 20px yellow !important;
+    box-shadow: 0 0 20px var(--yellow) !important;
 }
 .purple_shadow {
-    box-shadow: 0 0 20px purple !important;
+    box-shadow: 0 0 20px var(--purple) !important;
 }
 .cyan_shadow {
-    box-shadow: 0 0 20px cyan !important;
+    box-shadow: 0 0 20px var(--cyan) !important;
 }
 
 .grey_shadow {
@@ -87,10 +111,11 @@ nav ul a {
 #fade {
   background: white;
   position: absolute;
+  opacity: 0;
   height: 100%;
   width: 100%;
   z-index: -1;
-  transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1)
+  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1)
 }
 /*a.material-tooltip {
   top: 734px !important;
@@ -113,7 +138,7 @@ i.material-tooltip {
   z-index: 1;
   left: 29px;
   width:4px;
-  top: -44px;
+  top: -40px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
 }
@@ -132,6 +157,15 @@ i.material-tooltip {
   cursor: pointer;
   display: block;
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1)
+}
+
+.add-button {
+    width: 25px !important;
+    height: 25px !important;
+    padding-left: 2px !important;
+    margin-left: 14px !important;
+    padding-top: 0px !important;
+    border-top-width: 1px !important;
 }
 
 .not_done{
@@ -182,8 +216,7 @@ h6 {
 body {
   font-family: 'Futura', sans-serif;
   font-size: 1.3em;
-  color: 'black';
-  background: 'white';
+  background-color: white;
   margin-bottom: 70px;
 }
 
