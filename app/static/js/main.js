@@ -45,12 +45,20 @@ $(document).ready(function(){
 
         // fix title
         $('#title').attr('data-prev-title',"I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
-        $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
-
+        $('#title').html("<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+        $('#title').addClass('center')
         // date/login icon
-        // $('nav li').attr('data-prev-title',);
-        // $('nav li').html('
+        var prev = $('#icon').html()
+        console.log(prev)
+        $('#date').attr('data-prev-title',prev)
+        $('#icon').remove()
+        $('#date').html($(this).data('projectDate'));
+        $('#date').addClass('light')
 
+        // add delete link
+        var del = "<a href='/remove_project/" + $(this).data('projectId') + "'>Delete Project?</a>"
+        console.log(del)
+        $("#delete").html(del)
 
         // unbind hover functionality
         $(this).unbind('mouseenter mouseleave');
@@ -121,6 +129,14 @@ $(document).ready(function(){
 
         // fix title
         $('#title').html("I'm working on ...");
+        $('#title').removeClass('center')
+       // date/login icon
+        prev = $('#date').attr('data-prev-title')
+        $('#date').html(" ")
+        $('#date').append("<li id='icon'>" + prev + "</li>")
+        $('#date').removeClass('light')
+        // remove delete link
+        $("#delete").html(" ")
 
         // rebind project-line hover functionality
         $(this).hover(function(){
@@ -205,6 +221,13 @@ $(document).ready(function(){
         $('#title').attr('data-prev-title',$('#title').html());
         $(this).addClass('biggen');
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
+        var theValue = $(this).data('actionId');
+        console.log(theValue);
+        $('.hidden_input_action_id').val(theValue);
+        var url = './edit_action/' + theValue
+        console.log(theValue)
+        $('.editform').attr('action', url);
+        console.log($('.editform').attr('action'))
     }, function(){
         var color = $(this).data('color');
         var y = color + "_shadow";
@@ -217,8 +240,16 @@ $(document).ready(function(){
 
 $('.add-button').on('click', function(){
     var theValue = $(this).data('projectName');
+    console.log(theValue);
     $('.hidden_input').val(theValue);
 });
+
+// $('.add-button').on('click', function(){
+//     var theValue = $(this).data('actionId');
+//     console.log(theValue);
+//     $('.hidden_input_action_id').val(theValue);
+// });
+
 
 function initializeColors(){
     var project_lines = $('.project-line');

@@ -22,8 +22,13 @@ class ActionForm(Form):
     project_name = StringField('project_name', validators=[DataRequired()])
     due_date = DateField('due_date', validators=[DataRequired()])
 
+class EditForm(Form):
+    action_name = StringField('action_name', validators=[DataRequired()], render_kw={"placeholder": "Action"})
+    description = StringField('description', validators=[DataRequired()], render_kw={"placeholder": "Description"})
+    due_date = DateField('due_date', validators=[DataRequired()])
+
 class ProjectForm(Form):
     project_name = StringField('action_name', validators=[DataRequired()], render_kw={"placeholder": "Project Title"})
     description = StringField('description', validators=[DataRequired()], render_kw={"placeholder": "Description"})
-    due_date = DateField('due_date', validators=[Optional()],)
+    due_date = DateField('due_date', validators=[Optional()])
     color = StringField('color', validators=[DataRequired()], render_kw={"placeholder": "Color"})

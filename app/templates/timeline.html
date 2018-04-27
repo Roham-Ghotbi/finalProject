@@ -7,14 +7,17 @@
     <nav>
       <div class="nav-wrapper">
         <a id="title" class="brand-logo left" >I'm working on ...</a>
+        <ul id="nav" class="left">
+          <li id="delete" class="light" ></li>
+        </ul>
         <ul id="nav" class="right">
-            <li id="date"> 1-2  month guesstimate • Aug 27 Launch Goal </li> 
+            <li id="date" class="light"></li> 
             <!-- replace with user initials icon -->
-            <li><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> MW</a></li>
+            <li id="icon"><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> MW</a></li>
             <li><br></li>
         </ul>
       </div>
-    </nav>
+    </nav> 
   </div>
   <div id="fade"></div>
     <div class="row-projects">
@@ -31,6 +34,7 @@
 '           data-placement="top" 
             data-color="{{ project['color'] }}"
             data-project-id="{{ project['project_id'] }}"
+            data-project-date="{{ project['due_date'] }}"
             data-project-name="{{ project['project_name'] }}"></a>
           <ul class="slides">
             {% for action in project['actions']%}
@@ -44,7 +48,7 @@
                       {{ action['action_name'] }}
                       {{ action['description'] }}
                       <br>
-                      <a href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      <a href='#' class='modal-trigger editLink' data-toggle='modal' data-target='editModal' data-action-id='{{ action['action_id'] }}'>Edit</a>
                       <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
                       ">
                 </li>
@@ -56,8 +60,9 @@
                      data-project-name="{{ project['project_name'] }}"
                      data-content="
                       {{ action['action_name'] }}
+                      {{ action['description'] }} 
                       <br>
-                      {{ action['due_date'] }} <a href='{{ url_for('edit_action', value=action) }}''>Edit</a>
+                      <a href='#' class='modal-trigger editLink' data-toggle='modal' data-target='editModal' data-action-id='{{ action['action_id'] }}' >Edit</a>
                       <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
                       ">
                 </li>
@@ -74,17 +79,13 @@
     </div>
 
 
-    <div class="fixed-action-btn" id = "create_action">
-      <button  class="btn-floating btn-large red accent-2 tooltipped modal-trigger" 
-      data-toggle="modal" data-target="actionModal" data-position="left"><i class="large material-icons">add</i></button>
-    </div>
     <div class="fixed-action-btn" id = "create_project">
       <button  class="btn-floating btn-large red accent-2 tooltipped modal-trigger" 
       data-toggle="modal" data-target="projectModal" data-position="left" data-tooltip="Create Project"><i class="large material-icons">create</i></button>
     </div>
 
     <!-- Create Project Modal Structure -->
-    <div class="modal fade" id="projectModal">
+    <div class="modal " id="projectModal">
       <div class="modal-content">
         <h4>Create a Project</h4>
         <form method="post" action='{{ url_for("create_project") }}' name="ProjectForm">
@@ -111,8 +112,7 @@
     <div class="modal" id="actionModal" >
       <div class="modal-content">
         <h4>Add Action</h4>
-        <form method="post" action="{{ url_for('create_action', value='Build a House' ) }}" name="ActionForm">
-          how to set value here
+        <form method="post" action="{{ url_for('create_action' ) }}" name="ActionForm">
         {{ actionForm.hidden_tag() }}
         <div>
           {{actionForm.action_name(size=120)}}
@@ -130,13 +130,23 @@
     </div>
 
     <!-- Edit Action Modal Structure -->
-    <div id="edit-action-modal" class="modal">
+    <div class="modal" id="editModal" >
       <div class="modal-content">
-        <h4>Modal Header</h4>
-        <p>A bunch of text</p>
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        <form class="editform" action= "" method="post" name="EditForm">
+        <h4>Edit Action</h4>
+        {{ editForm.hidden_tag() }}
+        <div>
+          {{editForm.action_name(size=120)}}
+        </div>
+        <div>
+          {{editForm.description(size=120)}}
+        </div>
+        <div>
+          {{editForm.due_date(size=120)}}
+        </div>
+        <input style="display:none;" class="hidden_input_action_id" id="action_id" name="action_id" value="" />
+        <p><input class="btn btn-primary" type="submit" value="Submit Changes"></p>
+      </form>
       </div>
     </div>
 

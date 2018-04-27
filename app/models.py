@@ -47,6 +47,12 @@ def retrieve_password(username):
 
 def insert_project(project_name, description, due_date, color, user_id):
     with sql.connect("database.db") as con:
+        print(due_date)
+        print(type(due_date))
+        # b = due_date.split('-') 
+        # d = datetime(int(b[0]),int(b[1]),int(b[2]))
+        d = due_date
+        due_date = d.strftime('%b')  + ' ' + d.strftime('%d').strip("0")
         cur = con.cursor()
         cur.execute("INSERT INTO projects (project_name, description, due_date, color, user_id) VALUES (?,?,?,?,?)", (project_name, description, due_date, color, user_id))
         con.commit()
@@ -101,7 +107,7 @@ def retrieve_action_id(action_name, description, due_date, project_id, finished)
         result = cur.execute("SELECT action_id FROM actions WHERE action_name = ? AND description = ? AND due_date = ? AND project_id = ? AND finished = ?", (action_name, description, due_date, project_id, finished)).fetchone() 
         return result[0]
 
-def update_action(action_id, action_name, description, due_date, project_id, finished):
+def update_action(action_id, action_name, description, due_date, project_id, color, finished):
     
     with sql.connect("database.db") as con:
         sqlQ = ''' UPDATE actions
@@ -109,11 +115,12 @@ def update_action(action_id, action_name, description, due_date, project_id, fin
                   description = ? ,
                   due_date = ?,
                   project_id = ?,
+                  color = ?,
                   finished = ?
               WHERE action_id = ?'''
 
         cur = con.cursor()
-        cur.execute(sqlQ, (action_name, description, due_date, project_id, finished, action_id))
+        cur.execute(sqlQ, (action_name, description, due_date, project_id, color, finished, action_id))
         con.commit()
 
 def update_done(action_id):
@@ -143,6 +150,14 @@ def retrieve_all_actions(project_id):
         con.row_factory = sql.Row
         cur = con.cursor()
         result = cur.execute("SELECT * FROM actions WHERE project_id = ? ORDER BY date(due_date) ASC", (project_id, )).fetchall() 
+        return result
+
+def retrieve_action(action_id):
+    # returns action as dictionary
+    with sql.connect("database.db") as con:
+        con.row_factory = sql.Row
+        cur = con.cursor()
+        result = cur.execute("SELECT * FROM actions WHERE action_id = ?", (action_id, )).fetchone() 
         return result
 
 def delete_action(action_id):

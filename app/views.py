@@ -2,7 +2,7 @@ from __future__ import print_function # In python 2.7
 import sys
 from flask import render_template, redirect, request, session, url_for, json
 from app import app, models, db
-from .forms import SignupForm, ActionForm, ProjectForm
+from .forms import SignupForm, ActionForm, ProjectForm, EditForm
 # Access the models file to use SQL functions
 from .models import *
 #Securing password Storage
@@ -74,27 +74,9 @@ def display_user_timeline():
         p += [project]
 
     projectForm = ProjectForm()
-    username = session['username']
-    if projectForm.validate_on_submit():
-        user_id = retrieve_user_id(username) 
-        project_name = projectForm.project_name.data
-        description = projectForm.description.data
-        due_date = projectForm.due_date.data
-        insert_project(project_name, description, due_date, user_id)
-        return redirect('/timeline')
-
     actionForm = ActionForm()
-    if actionForm.validate_on_submit():
-        action_name = actionForm.action_name.data
-        description = actionForm.description.data
-        due_date = actionForm.due_date.data
-        project_name = actionForm.project_name.data
-        print(project_name, file=sys.stderr)
-        # TODO: how to get project id from project I am clicking from
-        project_id = retrieve_project_id(value)
-        insert_action(action_name, description, due_date, project_id, finished=0)
-        return redirect('/timeline')
-    return render_template('timeline.html', first_name=session['first_name'], p=p, projectForm=projectForm, actionForm=actionForm)
+    editForm = EditForm()
+    return render_template('timeline.html', first_name=session['first_name'], p=p, projectForm=projectForm, actionForm=actionForm, editForm=editForm)
 
 
 @app.route('/project_focus/<value>')
@@ -120,21 +102,19 @@ def create_project():
         return redirect('/timeline')
     return render_template('create_project.html', first_name=session['first_name'], projectForm=projectForm)
 
-@app.route('/create_action/<value>', methods=['GET', 'POST'])
-def create_action(value):
+@app.route('/create_action', methods=['GET', 'POST'])
+def create_action():
     actionForm = ActionForm()
     if actionForm.validate_on_submit():
         action_name = actionForm.action_name.data
         description = actionForm.description.data
         due_date = actionForm.due_date.data
         project_name = actionForm.project_name.data
-        print(project_name, file=sys.stderr)
-        # TODO: how to get project id from project I am clicking from
         project_id = retrieve_project_id(project_name)
-        print(project_id, file=sys.stderr)
         color = retrieve_project(project_id)['color']
-        print(color, file=sys.stderr)
         insert_action(action_name, description, due_date, project_id, color, finished=0)
+        update_action(16, 'UPDATED', 'UPDATED', due_date, 2, color, finished=0)
+
         return redirect('/timeline')
     return render_template('create_action.html', first_name=session['first_name'], actionForm=actionForm)
 
@@ -144,11 +124,47 @@ def remove_action(value):
     # TODO: just want to remove element from DOM w/o redirecting
     return redirect('timeline')
 
-@app.route('/edit_action/<value>')
+# @app.route('/edit_action')
+# def edit_action():
+#     editForm = EditForm()
+#     if editForm.validate_on_submit():
+#         action_name = editForm.action_name.data
+#         description = editForm.description.data
+#         due_date = editForm.due_date.data
+#         project_name = editForm.project_name.data
+#         project_id = retrieve_project_id(project_name)
+#         color = retrieve_project(project_id)['color']
+#         update_action(action_id, action_name, description, due_date, project_id, color, finished)
+#         return redirect('/timeline')
+#     return render_template('create_action.html', first_name=session['first_name'])
+
+#     form = Entry.query.get(id)
+#     form.title = 'Fred Flinstone'
+#     form.text = 'yabba dabba doo'
+#     db.session.commit(form)
+#     return redirect('timeline')
+
+@app.route('/edit_action/<value>', methods=['GET', 'POST'])
 def edit_action(value):
-    # update_action(value['action_id'], value['action_name'], value['description'], value['due_date'], value['project_id'], value['finished'])
-    # TODO: just want to edit Element from DOM w/o redirecting
-    return redirect('timeline')
+    print(value, file=sys.stderr)
+    action = dict(retrieve_action(value))
+    print(action,file=sys.stderr)
+    editForm = EditForm(action)
+    if form.validate_on_submit():
+        # This section needs to be reworked.
+        # You'll want to take the user object and set the appropriate attributes
+        # to the appropriate values from the form.
+        if form.username.data == nickname: 
+            query = EditProfile(form.username.data,
+                                form.email.data,
+                                form.about.data,
+                                form.website.data,
+                                )
+            db.session.add(query)
+            db.session.commit()
+            flash('User Updated')
+            return redirect('/timeline')
+    return render_template(url_for('timeline'), first_name=session['first_name'], actionForm=actionForm, projectForm=projectForm, editForm=editForm)
 
 
 @app.route('/remove_project/<value>')
