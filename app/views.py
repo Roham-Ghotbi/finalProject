@@ -16,7 +16,7 @@ def index():
         ## TODO: this doesn't seem right
         return redirect('/timeline')
     else:
-        return render_template('login1.html')
+        return render_template('login.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -24,11 +24,14 @@ def login():
         username = request.form['username']
         password = hashPass(username, request.form['password'])
         
-        if password == retrieve_password(username):
+        if retrieve_password(username) is not None and password == retrieve_password(username):
             user = retrieve_user(username)
             session['username'] = username
             session['first_name'] = user['first_name']
             # want to launch a popup but stay @ /login w/o 
+        else:
+            return render_template('login.html', message="Incorrect Password or Username(Email)")
+
     return redirect(url_for('index'))
 
 @app.route('/logout')
@@ -48,35 +51,39 @@ def testclean():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    signupForm = SignupForm()
-    if signupForm.validate_on_submit():
+    if(request.method == 'POST'):
+        username = request.form['username']
+        password = request.form['password']
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
 
-        first_name = signupForm.first_name.data
-        last_name = signupForm.last_name.data
-        username = signupForm.username.data
-        password = signupForm.password.data
-        res = insert_user(username, first_name, last_name, password)
-        if res == -1:
-            return redirect('/timeline', userExist=True)
+        if retrieve_user(username) is not None:
+            return render_template('/signup.html', message="Username Already Exists!")
         else:
-            return redirect('/index')
+            res = insert_user(username, first_name, last_name, password)
+            session['username'] = username
+            session['first_name'] = first_name
+            return redirect(url_for('index'))
 
-    return render_template('signup1.html', signupForm=signupForm)
+    return render_template('signup.html')
 
 @app.route('/timeline')
 def display_user_timeline():
-    user_id = retrieve_user_id(session['username'])
-    projects = retrieve_all_projects(user_id)
-    p = []
-    for project in projects:
-        project = dict(project)
-        project['actions'] = retrieve_all_actions(project['project_id'])
-        p += [project]
+    if 'username' in session:
+        user_id = retrieve_user_id(session['username'])
+        projects = retrieve_all_projects(user_id)
+        p = []
+        for project in projects:
+            project = dict(project)
+            project['actions'] = retrieve_all_actions(project['project_id'])
+            p += [project]
 
-    projectForm = ProjectForm()
-    actionForm = ActionForm()
-    editForm = EditForm()
-    return render_template('timeline.html', first_name=session['first_name'], p=p, projectForm=projectForm, actionForm=actionForm, editForm=editForm)
+        projectForm = ProjectForm()
+        actionForm = ActionForm()
+        editForm = EditForm()
+        return render_template('timeline.html', first_name=session['first_name'], p=p, projectForm=projectForm, actionForm=actionForm, editForm=editForm)
+    else:
+        return render_template('login.html')
 
 
 @app.route('/project_focus/<value>')
@@ -90,33 +97,38 @@ def project_focus(value):
 
 @app.route('/create_project', methods=['GET', 'POST'])
 def create_project():
-    projectForm = ProjectForm()
-    username = session['username']
-    if projectForm.validate_on_submit():
-        user_id = retrieve_user_id(username) 
-        project_name = projectForm.project_name.data
-        description = projectForm.description.data
-        due_date = projectForm.due_date.data
-        color = projectForm.color.data
-        insert_project(project_name, description, due_date, color, user_id)
-        return redirect('/timeline')
-    return render_template('create_project.html', first_name=session['first_name'], projectForm=projectForm)
-
+    if 'username' in session:
+        projectForm = ProjectForm()
+        username = session['username']
+        if projectForm.validate_on_submit():
+            user_id = retrieve_user_id(username) 
+            project_name = projectForm.project_name.data
+            description = projectForm.description.data
+            due_date = projectForm.due_date.data
+            color = projectForm.color.data
+            insert_project(project_name, description, due_date, color, user_id)
+            return redirect('/timeline')
+        return render_template('create_project.html', first_name=session['first_name'], projectForm=projectForm)
+    else:
+        return render_template('login.html')
 @app.route('/create_action', methods=['GET', 'POST'])
 def create_action():
-    actionForm = ActionForm()
-    if actionForm.validate_on_submit():
-        action_name = actionForm.action_name.data
-        description = actionForm.description.data
-        due_date = actionForm.due_date.data
-        project_name = actionForm.project_name.data
-        project_id = retrieve_project_id(project_name)
-        color = retrieve_project(project_id)['color']
-        insert_action(action_name, description, due_date, project_id, color, finished=0)
-        update_action(16, 'UPDATED', 'UPDATED', due_date, 2, color, finished=0)
+    if 'username' in session:
+        actionForm = ActionForm()
+        if actionForm.validate_on_submit():
+            action_name = actionForm.action_name.data
+            description = actionForm.description.data
+            due_date = actionForm.due_date.data
+            project_name = actionForm.project_name.data
+            project_id = retrieve_project_id(project_name)
+            color = retrieve_project(project_id)['color']
+            insert_action(action_name, description, due_date, project_id, color, finished=0)
+            update_action(16, 'UPDATED', 'UPDATED', due_date, 2, color, finished=0)
 
-        return redirect('/timeline')
-    return render_template('create_action.html', first_name=session['first_name'], actionForm=actionForm)
+            return redirect('/timeline')
+        return render_template('create_action.html', first_name=session['first_name'], actionForm=actionForm)
+    else:
+        return render_template('login.html')
 
 @app.route('/remove_action/<value>')
 def remove_action(value):

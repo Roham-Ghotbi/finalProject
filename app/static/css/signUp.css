@@ -1,10 +1,50 @@
 body {
-    background-image: url("background3.png");
+    background-image: url("background3.PNG");
     /*background-repeat: no-repeat;*/
     background-size: cover;
 }
 
-.section {
+.container {
 	vertical-align: baseline;
 	text-align: center;
+}
+
+header {
+	padding-top: 15%;
+	text-align: center;
+}
+
+.text-inputs {
+	margin: 20px auto;
+	text-align: center;	
+}
+
+.intext {
+	display: block;
+	width: 250px;
+	height: 40px;
+	margin:auto;    
+}
+
+.error {
+	color: red;
+	text-align:center;
+	padding-bottom: 5px;
+	font-weight:bold;
+}
+
+#js-email-field {
+	padding-bottom: 5px;
+}
+
+#js-firstname-field {
+	padding-bottom: 5px;
+}
+
+#js-lastname-field {
+	padding-bottom: 5px;
+}
+
+#js-password-field {
+	padding-bottom: 5px;
 }

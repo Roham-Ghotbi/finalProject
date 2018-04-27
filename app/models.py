@@ -30,8 +30,12 @@ def retrieve_user(username):
 
 def retrieve_user_id(username):
     with sql.connect("database.db") as con:
-    	cur = con.cursor()
-    	return str(cur.execute("SELECT user_id FROM users WHERE email = ?", (username, )).fetchone()[0]) # why is it in tuple form??
+        cur = con.cursor()
+        result = cur.execute("SELECT user_id FROM users WHERE email = ?", (username, )).fetchone()
+        if result is None:
+            return None
+        else:
+            return str(result[0]) # why is it in tuple form??
 
 def retrieve_all_emails():
     with sql.connect("database.db") as con:
@@ -41,7 +45,11 @@ def retrieve_all_emails():
 def retrieve_password(username):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        return str(cur.execute("SELECT password FROM users WHERE email = ?", (username, )).fetchone()[0])
+        result = cur.execute("SELECT password FROM users WHERE email = ?", (username, )).fetchone()
+        if result is None:
+            return None
+        else:
+            return str(result[0])
 
 ##### PROJECT #####
 
@@ -70,14 +78,22 @@ def retrieve_project_id(project_name):
     # returns project_id
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        return str(cur.execute('select project_id from projects where project_name = "' + project_name + '"').fetchone()[0])
+        result = cur.execute("SELECT project_id from projects where project_name = ?", (project_name, )).fetchone()
+        if result is None:
+            return None
+        else:
+            return str(result[0])
 
 def retrieve_project_id_from_action(action_id):
     # returns project_id
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        return str(cur.execute("SELECT project_id from actions where action_id = ?", (action_id, )).fetchone()[0])
-
+        result = cur.execute("SELECT project_id from actions where action_id = ?", (action_id, )).fetchone()
+        if result is None:
+            return None
+        else:
+            return str(result[0])
+            
 def retrieve_all_projects(user_id):
     with sql.connect("database.db") as con:
         con.row_factory = sql.Row
@@ -105,7 +121,10 @@ def retrieve_action_id(action_name, description, due_date, project_id, finished)
     with sql.connect("database.db") as con:
         cur = con.cursor()
         result = cur.execute("SELECT action_id FROM actions WHERE action_name = ? AND description = ? AND due_date = ? AND project_id = ? AND finished = ?", (action_name, description, due_date, project_id, finished)).fetchone() 
-        return result[0]
+        if result is None:
+            return None
+        else:
+            return result[0]
 
 def update_action(action_id, action_name, description, due_date, project_id, color, finished):
     
