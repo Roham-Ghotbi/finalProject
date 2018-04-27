@@ -46,7 +46,6 @@
                      data-project-name="{{ project['project_name'] }}"
                      data-content="
                       {{ action['action_name'] }}
-                      {{ action['description'] }}
                       <br>
                       <a href='#' class='modal-trigger editLink' data-toggle='modal' data-target='editModal' data-action-id='{{ action['action_id'] }}'>Edit</a>
                       <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
@@ -60,7 +59,6 @@
                      data-project-name="{{ project['project_name'] }}"
                      data-content="
                       {{ action['action_name'] }}
-                      {{ action['description'] }} 
                       <br>
                       <a href='#' class='modal-trigger editLink' data-toggle='modal' data-target='editModal' data-action-id='{{ action['action_id'] }}' >Edit</a>
                       <a href='{{ url_for('remove_action', value=action['action_id']) }}''>Delete</a>
