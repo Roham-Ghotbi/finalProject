@@ -13,7 +13,7 @@
         <ul id="nav" class="right">
             <li id="date" class="light"></li> 
             <!-- replace with user initials icon -->
-            <li id="icon"><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> MW</a></li>
+            <li id="icon"><a class="tooltipped" data-position="left" data-tooltip="Logout" href="{{url_for('logout')}}"> {{session['first_name']}}</a></li>
             <li><br></li>
         </ul>
       </div>
