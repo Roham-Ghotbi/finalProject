@@ -32,21 +32,6 @@
                 {{message}}
                 </div>
               {% endif %}
-              
-              <div class="google-login" data-i18n-or="or">
-                <form class="connect-button" name="login" data-module="registration/connect-account-button" method="POST" action="/login">
-                  <!-- Google Login NEEDS TO BE FIXED-->
-                  <div class="g-signin2" data-onsuccess="onSignIn">
-                    <button type="submit" class="aui-button google-button login-with-google" resolved="">
-                      <span class="connect-button--label">Log in with Google</span>
-                    </button>
-                  </div>
-                </form>
-              </div>
-
-              <div class="or">
-                or
-              </div>
     
               <form action="/login" class="aui aid-form errors-below-inputs"  method = "POST">
 
@@ -60,9 +45,6 @@
 
                 <div class="button-container submit-container">
                   <input type="submit" class="large-blue-button selenium-login-submit aui-button-primary" value="Log in">
-                  <a class="reset-password" href="/account/password/reset/">
-                    Forgot your password?
-                  </a>
                 </div>
 
                 
