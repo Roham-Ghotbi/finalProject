@@ -7,17 +7,21 @@ from .forms import SignupForm, ActionForm, ProjectForm, EditForm
 from .models import *
 #Securing password Storage
 import hashlib, uuid
+import datetime
 
+#the index page
+#if a user is already signed in, it will load its timeline, otherwise it will go to the login page
 @app.route('/')
 @app.route('/index')
 def index():
     if 'username' in session: 
         username = session['username']
-        ## TODO: this doesn't seem right
         return redirect('/timeline')
     else:
         return render_template('login.html')
 
+#the login page
+#getting the user login
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if(request.method == 'POST'):
@@ -28,12 +32,12 @@ def login():
             user = retrieve_user(username)
             session['username'] = username
             session['first_name'] = user['first_name']
-            # want to launch a popup but stay @ /login w/o 
         else:
             return render_template('login.html', message="Incorrect Password or Username(Email)")
 
     return redirect(url_for('index'))
 
+#logging out the user from the website
 @app.route('/logout')
 def logout():
     session.pop('username', None)
@@ -41,14 +45,9 @@ def logout():
     session.pop('first_name', None)
     return redirect('index')
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
 
-@app.route('/testclean')
-def testclean():
-    return render_template('testclean.html')
-
+#signup page for new users
+#accesible through login page
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if(request.method == 'POST'):
@@ -56,9 +55,11 @@ def signup():
         password = request.form['password']
         first_name = request.form['first_name']
         last_name = request.form['last_name']
-
+        
         if retrieve_user(username) is not None:
             return render_template('/signup.html', message="Username Already Exists!")
+        elif username == "" or password == "" or first_name == "" or last_name == "":
+            return render_template('/signup.html', message="Please Fill out the form Completely!")
         else:
             res = insert_user(username, first_name, last_name, password)
             session['username'] = username
@@ -67,6 +68,11 @@ def signup():
 
     return render_template('signup.html')
 
+
+#timeline 
+#core of our website
+#will only be loaded if a user is signed in
+#will go to the login page otherwise
 @app.route('/timeline')
 def display_user_timeline():
     if 'username' in session:
@@ -88,8 +94,6 @@ def display_user_timeline():
 
 @app.route('/project_focus/<value>')
 def project_focus(value):
-    # TODO: make routing more intuitive, maybe something like /<project_name>/<focus_value>
-    # TODO: use value to focus on action
     project_id = retrieve_project_id(value)
     actions = retrieve_all_actions(project_id)
     project = retrieve_project(project_id)
@@ -97,92 +101,107 @@ def project_focus(value):
 
 @app.route('/create_project', methods=['GET', 'POST'])
 def create_project():
+    colors = ["red", "blue", "green", "yellow", "purple", "cyan"]
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+
     if 'username' in session:
         projectForm = ProjectForm()
         username = session['username']
-        if projectForm.validate_on_submit():
+        if projectForm.is_submitted():
             user_id = retrieve_user_id(username) 
             project_name = projectForm.project_name.data
             description = projectForm.description.data
             due_date = projectForm.due_date.data
             color = projectForm.color.data
+
+            if project_name == "": 
+                project_name = "MyProject"
+            if description == "": 
+                description = "Description"
+            if due_date is None: 
+                due_date = datetime.date(year, month, day)
+            if color == "" or color not in colors:
+                color = "blue"
+
             insert_project(project_name, description, due_date, color, user_id)
-            return redirect('/timeline')
-        return render_template('create_project.html', first_name=session['first_name'], projectForm=projectForm)
+
+        return redirect('/timeline')
+
     else:
         return render_template('login.html')
+
 @app.route('/create_action', methods=['GET', 'POST'])
 def create_action():
+    #creating the action based on the user input
+    #using default values otherwise
+    now = datetime.datetime.now()
+    year = now.year
+    month = now.month
+    day = now.day
+
     if 'username' in session:
         actionForm = ActionForm()
-        if actionForm.validate_on_submit():
+        if actionForm.is_submitted():
             action_name = actionForm.action_name.data
             description = actionForm.description.data
             due_date = actionForm.due_date.data
             project_name = actionForm.project_name.data
             project_id = retrieve_project_id(project_name)
             color = retrieve_project(project_id)['color']
-            insert_action(action_name, description, due_date, project_id, color, finished=0)
-            update_action(16, 'UPDATED', 'UPDATED', due_date, 2, color, finished=0)
 
-            return redirect('/timeline')
-        return render_template('create_action.html', first_name=session['first_name'], actionForm=actionForm)
+            if action_name == "": 
+                action_name = "MyAction"
+            if description == "": 
+                description = "Description"
+            if due_date is None: 
+                due_date = datetime.date(year, month, day)
+
+            insert_action(action_name, description, due_date, project_id, color, finished=0)
+            
+        return redirect('/timeline')
     else:
         return render_template('login.html')
 
+#deletingan action of a project
 @app.route('/remove_action/<value>')
 def remove_action(value):
     delete_action(value)
-    # TODO: just want to remove element from DOM w/o redirecting
     return redirect('timeline')
 
-# @app.route('/edit_action')
-# def edit_action():
-#     editForm = EditForm()
-#     if editForm.validate_on_submit():
-#         action_name = editForm.action_name.data
-#         description = editForm.description.data
-#         due_date = editForm.due_date.data
-#         project_name = editForm.project_name.data
-#         project_id = retrieve_project_id(project_name)
-#         color = retrieve_project(project_id)['color']
-#         update_action(action_id, action_name, description, due_date, project_id, color, finished)
-#         return redirect('/timeline')
-#     return render_template('create_action.html', first_name=session['first_name'])
-
-#     form = Entry.query.get(id)
-#     form.title = 'Fred Flinstone'
-#     form.text = 'yabba dabba doo'
-#     db.session.commit(form)
-#     return redirect('timeline')
-
+#updating an action of a project
 @app.route('/edit_action/<value>', methods=['GET', 'POST'])
 def edit_action(value):
-    print(value, file=sys.stderr)
-    action = dict(retrieve_action(value))
-    print(action,file=sys.stderr)
-    editForm = EditForm(action)
-    if form.validate_on_submit():
-        # This section needs to be reworked.
-        # You'll want to take the user object and set the appropriate attributes
-        # to the appropriate values from the form.
-        if form.username.data == nickname: 
-            query = EditProfile(form.username.data,
-                                form.email.data,
-                                form.about.data,
-                                form.website.data,
-                                )
-            db.session.add(query)
-            db.session.commit()
-            flash('User Updated')
-            return redirect('/timeline')
-    return render_template(url_for('timeline'), first_name=session['first_name'], actionForm=actionForm, projectForm=projectForm, editForm=editForm)
+    if 'username' in session:
+        #getting data in the db
+        action = retrieve_action(value)
+        
+        #basically updating whatever new data the user puts in
+        #and keeping the unchanged ones intact
+        editForm = EditForm()
+        if editForm.is_submitted():
+            action_name = editForm.action_name.data
+            description = editForm.description.data
+            due_date = editForm.due_date.data
 
+            if action_name == "": 
+                action_name = action['action_name']
+            if description == "": 
+                description = action['description']
+            if due_date is None: 
+                due_date = action['due_date']  
+
+            update_action(action['action_id'], action_name, description, due_date, action['project_id'], action['color'], action['finished'])
+            
+        return redirect('/timeline')
+    else:
+        return render_template('login.html')
 
 @app.route('/remove_project/<value>')
 def remove_project(value):
     delete_project(value)
-    # TODO: just want to remove element from DOM w/o redirecting
     return redirect('timeline')
 
 @app.route('/toggle_done', methods=['GET','POST'])
