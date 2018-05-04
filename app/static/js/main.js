@@ -30,10 +30,10 @@ $(document).ready(function(){
 
             }
         }
-        console.log($('.btn-floating').data('target'));
+        // console.log($('.btn-floating').data('target'));
         $('div#create_project').css('z-index', 1);
         $('.btn-floating').attr('data-tooltip',"Create Action");
-        console.log($('.btn-floating').data('target'));
+        // console.log($('.btn-floating').data('target'));
         
         // highlighting
         var x = $(this).data('projectId');
@@ -49,7 +49,7 @@ $(document).ready(function(){
         $('#title').addClass('center')
         // date/login icon
         var prev = $('#icon').html()
-        console.log(prev)
+        // console.log(prev)
         $('#date').attr('data-prev-title',prev)
         $('#icon').remove()
         $('#date').html($(this).data('projectDate'));
@@ -57,7 +57,7 @@ $(document).ready(function(){
 
         // add delete link
         var del = "<a href='/remove_project/" + $(this).data('projectId') + "'>Delete Project?</a>"
-        console.log(del)
+        // console.log(del)
         $("#delete").html(del)
 
         // unbind hover functionality
@@ -86,7 +86,7 @@ $(document).ready(function(){
                         var _this = this;
                         $(this).popover("show");
                         $(".popover").on("mouseleave", function () {
-                            console.log('wat')
+                            // console.log('wat')
                             $(_this).popover('hide');
                         });
                     }).on("mouseleave", function () {
@@ -115,10 +115,10 @@ $(document).ready(function(){
                 });
             }   
         }
-        console.log($('.btn-floating').data('target'));
+        // console.log($('.btn-floating').data('target'));
         // $('div#create_project').css('z-index', 1000);
         $('.btn-floating').attr('data-tooltip',"Create Project");
-        console.log($('.btn-floating').data('target'));
+        // console.log($('.btn-floating').data('target'));
         var x = $(this).data('projectId');
         var color = $(this).data('color');
         var y = color + "_shadow";
@@ -201,7 +201,7 @@ $(document).ready(function(){
         // action button colors
         $('.' + x).removeClass(y);
         $(this).removeClass(y);
-        console.log($('#title').data('prevTitle'))
+        // console.log($('#title').data('prevTitle'))
         $('#title').html($('#title').data('prevTitle'));
         var projectName = $(this).data('projectName');
         var action_buttons = $('.action-button');
@@ -222,12 +222,12 @@ $(document).ready(function(){
         $(this).addClass('biggen');
         $('#title').html("I'm working on " + "<font color=" + $(this).data('color') + ">" + $(this).data('projectName')+"</font>");
         var theValue = $(this).data('actionId');
-        console.log(theValue);
+        // console.log(theValue);
         $('.hidden_input_action_id').val(theValue);
         var url = './edit_action/' + theValue
-        console.log(theValue)
+        // console.log(theValue)
         $('.editform').attr('action', url);
-        console.log($('.editform').attr('action'))
+        // console.log($('.editform').attr('action'))
     }, function(){
         var color = $(this).data('color');
         var y = color + "_shadow";
@@ -240,7 +240,7 @@ $(document).ready(function(){
 
 $('.add-button').on('click', function(){
     var theValue = $(this).data('projectName');
-    console.log(theValue);
+    // console.log(theValue);
     $('.hidden_input').val(theValue);
 });
 
@@ -350,7 +350,7 @@ $(".action-button").on('dblclick', function() {
         }
         var x = percentage($(this).data('projectName'));
         var sel = ".project-line[data-project-name= '" + $(this).data('projectName') + "']";
-        console.log(sel);
+        // console.log(sel);
         $(sel).attr('data-content',"<font color=" + $(this).data('color') + ">" + x +"</font>");
 });
 

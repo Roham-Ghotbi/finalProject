@@ -111,8 +111,8 @@ def retrieve_all_projects(user_id):
 def delete_project(project_id):
     with sql.connect("database.db") as con:
         cur = con.cursor()
-        cur.execute("DELETE FROM projects WHERE project_id = ?", (project_id,))
         cur.execute("DELETE FROM actions WHERE project_id = ?", (project_id,))
+        cur.execute("DELETE FROM projects WHERE project_id = ?", (project_id,))
         con.commit()
 
 

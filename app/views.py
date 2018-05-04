@@ -199,7 +199,7 @@ def edit_action(value):
     else:
         return render_template('login.html')
 
-@app.route('/remove_project/<value>')
+@app.route('/remove_project/<value>', methods=["GET"])
 def remove_project(value):
     delete_project(value)
     return redirect('timeline')
